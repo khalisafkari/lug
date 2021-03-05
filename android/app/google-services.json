@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "92215511916",
+    "project_id": "lovehug-net",
+    "storage_bucket": "lovehug-net.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:92215511916:android:0183661abb915560ab0149",
+        "android_client_info": {
+          "package_name": "com.lovehug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "92215511916-17mbmhurrpss8iilcpak7a59hjhbg7c8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdg0vpZlz2vG4HAhSAWoU00wyxm-1dIDY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "92215511916-17mbmhurrpss8iilcpak7a59hjhbg7c8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

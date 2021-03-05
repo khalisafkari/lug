@@ -1,0 +1,67 @@
+{
+  "name": "lovehug",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "start": "react-native start",
+    "test": "jest",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+  },
+  "dependencies": {
+    "@react-native-firebase/analytics": "^11.0.0",
+    "@react-native-firebase/app": "^11.0.0",
+    "@react-native-firebase/perf": "^11.0.0",
+    "@sentry/react-native": "^2.2.2",
+    "@stream-io/flat-list-mvcp": "^0.0.9",
+    "axios": "^0.21.1",
+    "dayjs": "^1.10.4",
+    "numeral": "^2.0.6",
+    "react": "16.13.1",
+    "react-native": "0.63.4",
+    "react-native-applovin-max": "^1.1.5",
+    "react-native-fast-image": "^8.3.4",
+    "react-native-intersection-observer": "^0.0.7",
+    "react-native-mmkv-storage": "^0.4.4",
+    "react-native-navigation": "^7.11.2",
+    "react-native-onesignal": "^4.0.4",
+    "react-native-read-more-text": "^1.1.2",
+    "react-native-render-html": "^5.1.0",
+    "react-native-v8": "^0.63.4-patch.1",
+    "react-native-vector-icons": "^8.1.0",
+    "react-native-webview": "^11.2.3",
+    "react-native-x-carousel": "^1.0.1",
+    "swr": "^0.4.2",
+    "v8-android-jit-nointl": "^9.88.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/runtime": "^7.8.4",
+    "@react-native-community/eslint-config": "^1.1.0",
+    "@types/jest": "^25.2.3",
+    "@types/numeral": "^2.0.1",
+    "@types/react-native": "^0.63.2",
+    "@types/react-native-read-more-text": "^1.0.0",
+    "@types/react-native-vector-icons": "^6.4.6",
+    "@types/react-test-renderer": "^16.9.2",
+    "babel-jest": "^25.1.0",
+    "babel-plugin-module-resolver": "^4.1.0",
+    "eslint": "^6.5.1",
+    "jest": "^25.1.0",
+    "metro-react-native-babel-preset": "^0.59.0",
+    "react-test-renderer": "16.13.1",
+    "typescript": "^3.8.3"
+  },
+  "jest": {
+    "preset": "react-native",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  }
+}
