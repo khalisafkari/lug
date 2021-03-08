@@ -1,6 +1,6 @@
 import React from 'react';
 import {ScrollView} from 'react-native';
-import useSWR from 'swr/esm';
+import useSWR from 'swr';
 import instance from 'utils/instance';
 import Error from 'component/Error';
 import Loading from 'component/Loading';
