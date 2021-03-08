@@ -38,43 +38,45 @@ const Home: React.FC<props> = ({componentId}) => {
     return <Loading ActivityProps={{color: '#fff', size: 25}} />;
   }
 
+  const renderItem = (item: string, index: number) => {
+    if (item === 'slide') {
+      return null;
+    } else if (item === 'top comment') {
+      return (
+        <React.Suspense
+          key={index}
+          fallback={<Loading ActivityProps={{color: '#fff', size: 15}} />}>
+          <MultiComponent
+            horizontal={true}
+            data={data.content[item]}
+            title={item}
+            componentId={componentId}
+          />
+        </React.Suspense>
+      );
+    } else {
+      return (
+        <React.Suspense
+          key={index}
+          fallback={<Loading ActivityProps={{color: '#fff', size: 15}} />}>
+          <MultiComponent
+            horizontal={false}
+            data={data.content[item]}
+            title={item}
+            componentId={componentId}
+          />
+        </React.Suspense>
+      );
+    }
+  };
+
   return (
     <ScrollView>
       <React.Suspense
         fallback={<Loading ActivityProps={{color: '#fff', size: 25}} />}>
         <Slide componentId={componentId} data={data.content.slide} />
       </React.Suspense>
-      {Object.keys(data.content).map((item, index) => {
-        if (item === 'slide') {
-          return null;
-        }
-        if (item === 'top comment') {
-          return (
-            <React.Suspense
-              key={index}
-              fallback={<Loading ActivityProps={{color: '#fff', size: 15}} />}>
-              <MultiComponent
-                horizontal={true}
-                data={data.content[item]}
-                title={item}
-                componentId={componentId}
-              />
-            </React.Suspense>
-          );
-        }
-        return (
-          <React.Suspense
-            key={index}
-            fallback={<Loading ActivityProps={{color: '#fff', size: 15}} />}>
-            <MultiComponent
-              horizontal={false}
-              data={data.content[item]}
-              title={item}
-              componentId={componentId}
-            />
-          </React.Suspense>
-        );
-      })}
+      {Object.keys(data.content).map(renderItem)}
     </ScrollView>
   );
 };
