@@ -80,8 +80,15 @@ Navigation.setDefaultOptions({
   },
 });
 
-Sentry.init({
-  dsn:
-    'https://cb4a2f6cbc904f8b829799180f887f4f@o121589.ingest.sentry.io/5661451',
-});
+if (!__DEV__) {
+  Sentry.init({
+    dsn:
+      'https://cb4a2f6cbc904f8b829799180f887f4f@o121589.ingest.sentry.io/5661451',
+    integrations: new Sentry.ReactNativeTracing({
+      tracingOrigins: ['localhost', 'beta.lovehug.net', /^\//],
+    }),
+    tracesSampleRate: 1.0,
+  });
+}
+
 OneSignal.setAppId('deffad9f-2bd8-404e-ba0e-0d8829522aa4');

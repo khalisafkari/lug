@@ -4,6 +4,7 @@ import styles from './styles';
 import {Navigation} from 'react-native-navigation';
 import {onLoginUser} from '@utils/lib';
 import Loading from 'component/Loading';
+import * as sentry from '@sentry/react-native';
 
 interface props {
   componentId: string;
@@ -20,6 +21,9 @@ const Login: React.FC<props> = ({componentId}) => {
       onLoginUser(email, password)
         .then(() => {
           Navigation.dismissModal(componentId);
+          sentry.setUser({
+            email: email,
+          });
         })
         .catch(() => {
           ToastAndroid.show(

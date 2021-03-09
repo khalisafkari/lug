@@ -8,6 +8,7 @@ import Ionic from 'react-native-vector-icons/Ionicons';
 import styles from './styles';
 import OneSignal, {DeviceState} from 'react-native-onesignal';
 import useSWR from 'swr';
+import * as Sentry from '@sentry/react-native';
 
 interface props {
   componentId: string;
@@ -54,6 +55,7 @@ const Profile: React.FC<props> = (props) => {
 
   const onLogoutLayout = () => {
     onLogout();
+    Sentry.configureScope((scope) => scope.setUser(null));
     Navigation.mergeOptions(props.componentId, {
       bottomTabs: {
         currentTabIndex: 0,
