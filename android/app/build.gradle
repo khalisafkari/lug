@@ -1,6 +1,7 @@
 apply plugin: "com.android.application"
 apply plugin: "com.google.gms.google-services"
 apply plugin: "com.google.firebase.firebase-perf"
+apply plugin: "io.bitrise.trace.plugin"
 
 buildscript {
     repositories {
@@ -139,6 +140,7 @@ dependencies {
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
     implementation 'org.chromium:v8-android:+'
+    implementation 'io.bitrise.trace:trace-sdk:[latestVersion]'
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
       exclude group:'com.facebook.fbjni'
