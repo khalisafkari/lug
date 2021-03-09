@@ -19,7 +19,7 @@ buildscript {
         classpath("com.android.tools.build:gradle:3.5.3")
         classpath("com.google.gms:google-services:4.3.3")
         classpath("com.google.firebase:perf-plugin:1.3.1")
-        classpath("io.bitrise.trace.plugin:trace-gradle-plugin:[latestVersion]")
+        classpath("io.bitrise.trace.plugin:trace-gradle-plugin:0.0.5")
     }
 }
 
