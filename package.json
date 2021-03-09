@@ -32,7 +32,7 @@
     "react-native-vector-icons": "^8.1.0",
     "react-native-webview": "^11.2.3",
     "react-native-x-carousel": "^1.0.1",
-    "swr": "^0.4.2",
+    "swr": "^0.5.0",
     "v8-android-jit-nointl": "^9.88.0"
   },
   "devDependencies": {
