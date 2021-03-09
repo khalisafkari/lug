@@ -1345,10 +1345,17 @@
     "@types/react" "*"
     "@types/react-native" "*"
 
-"@types/react-native@*", "@types/react-native@^0.63.2":
+"@types/react-native@*":
   version "0.63.49"
   resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.63.49.tgz#b9a4781a0543763f0079c3ef2ba2148a4509b32e"
   integrity sha512-ivTn2n9xsmlwSO1GygkwEMjkrSDqPAJVhbhsl3EffGtG6zWPaJ+AJVImPoBZN1VY8GItGPPlLGEb0i6LGb83VA==
+  dependencies:
+    "@types/react" "*"
+
+"@types/react-native@^0.63.51":
+  version "0.63.51"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.63.51.tgz#2fc45ab934801770cdbbcdc6ae5cd85c0e2a2a02"
+  integrity sha512-lpJdBF7T/nZigbequu7p4NptZmTUKq8R7vRADkk00H8DR5igspL10B1F58MvNTu8o/TyqzPISyWoRARqaIy+mw==
   dependencies:
     "@types/react" "*"
 
@@ -5961,10 +5968,10 @@ react-lifecycles-compat@2.0.0:
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-2.0.0.tgz#71d9c4cde47114c4102454f76da055c2bc48c948"
   integrity sha512-txfpPCQYiazVdcbMRhatqWKcAxJweUu2wDXvts5/7Wyp6+Y9cHojqXHsLPEckzutfHlxZhG8Oiundbmp8Fd6eQ==
 
-react-native-applovin-max@^1.1.5:
-  version "1.1.5"
-  resolved "https://registry.yarnpkg.com/react-native-applovin-max/-/react-native-applovin-max-1.1.5.tgz#2b53c7e868ccfc23de297ae044faf54bf568d538"
-  integrity sha512-cDCuwsSn8qJ8DwLnKXLssSNTlOxfrVYKGR4U28oEVOl+WFLq72r0o4mAkduwTrSS0vGp3DYR3CTrh2Y8i6FyQA==
+react-native-applovin-max@^1.1.6:
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/react-native-applovin-max/-/react-native-applovin-max-1.1.6.tgz#3b468eb37eb037a0e51e915c0ae77926bf206b6b"
+  integrity sha512-OeYWUo8ZWJTD/VGDSh494tolivQcxeGO30Mhtia6laCmXLFzkhb2E+9J2hSo7n3u/nMk4q2TF/Q+6FwnyzeRrg==
 
 react-native-fast-image@^8.3.4:
   version "8.3.4"
@@ -5978,10 +5985,10 @@ react-native-intersection-observer@^0.0.7:
   dependencies:
     lodash "^4.0.0"
 
-react-native-mmkv-storage@^0.4.4:
-  version "0.4.4"
-  resolved "https://registry.yarnpkg.com/react-native-mmkv-storage/-/react-native-mmkv-storage-0.4.4.tgz#deafd63857bfed3facd0e406e01e82eb7a76c1b3"
-  integrity sha512-NuLKc9C0xLPgteQpieGMGbkNm8A0ma8rzfErQKZbS4KLD2bWQ8c1rZ71JgGBiJrCffpDy1BNZt86DZtPl7djXw==
+react-native-mmkv-storage@^0.5.2:
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/react-native-mmkv-storage/-/react-native-mmkv-storage-0.5.2.tgz#1463e5b443ce3a1d3eb0c2fa89cdb424d49e9883"
+  integrity sha512-GtxYu0oTYwNfx2Ts+zpYfFyyVy8NJM96YMjQnHII8KaMRo/SYx81YR/EALYlWXLg/bBzErqUR4R9pKEu0N7jQQ==
 
 react-native-navigation@^7.11.2:
   version "7.11.2"
@@ -5994,10 +6001,10 @@ react-native-navigation@^7.11.2:
     react-lifecycles-compat "2.0.0"
     tslib "1.9.3"
 
-react-native-onesignal@^4.0.4:
-  version "4.0.4"
-  resolved "https://registry.yarnpkg.com/react-native-onesignal/-/react-native-onesignal-4.0.4.tgz#72d81ee48963431ccde0344a0812be63ad8363d1"
-  integrity sha512-bDHuuvz8DIvzyu7N0tWOiRrCh0Lwv08FyHHN1d34vCKnInjwI7DWaYWRBN7VROw7yZoukMMOZ3jOdmVZUL1p2w==
+react-native-onesignal@^4.0.5:
+  version "4.0.5"
+  resolved "https://registry.yarnpkg.com/react-native-onesignal/-/react-native-onesignal-4.0.5.tgz#d3a3b23b401e8e1f065d9af0941f6f26f21018e5"
+  integrity sha512-clDuRYKuyiMRBizgCN9EqyLWpZhVJPgcl9o7SCRUokot1Cg3Lsh1IMdpzqKh4HfPKaoj3sYC0XQtWAn9OhBw3w==
   dependencies:
     invariant "^2.2.2"
 

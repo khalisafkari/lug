@@ -5,6 +5,7 @@ import {Navigation} from 'react-native-navigation';
 import {onLoginUser} from '@utils/lib';
 import Loading from 'component/Loading';
 import * as sentry from '@sentry/react-native';
+import OneSignal from 'react-native-onesignal';
 
 interface props {
   componentId: string;
@@ -21,9 +22,9 @@ const Login: React.FC<props> = ({componentId}) => {
       onLoginUser(email, password)
         .then(() => {
           Navigation.dismissModal(componentId);
-          sentry.setUser({
-            email: email,
-          });
+          sentry.setUser({email: email});
+          OneSignal.setEmail(email);
+          OneSignal.setExternalUserId(email);
         })
         .catch(() => {
           ToastAndroid.show(
