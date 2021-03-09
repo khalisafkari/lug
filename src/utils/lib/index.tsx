@@ -1,14 +1,9 @@
 import {MMKVWithToken} from '@utils/database/mmkv';
 import instance from '@utils/instance';
 import useSWR, {useSWRInfinite} from 'swr';
-import {isData as dt} from '../../../typed';
+import {isData as dt, manga} from '../../../typed';
 import {RouteDefault, RouteProtect} from 'utils/route';
 import {ToastAndroid} from 'react-native';
-
-interface props {
-  expiredAt: string;
-  token: string;
-}
 
 interface post {
   manga: number | null;
@@ -30,7 +25,7 @@ interface country {
 
 const saveToken = async (payload: getToken) => {
   try {
-    const save = await MMKVWithToken.setMapAsync('token', payload);
+    const save: any = await MMKVWithToken.setMapAsync('token', payload);
     return save;
   } catch (e) {
     const error = new Error();
@@ -41,7 +36,7 @@ const saveToken = async (payload: getToken) => {
 
 const getToken = async (): Promise<getToken | object | null> => {
   try {
-    const token = await MMKVWithToken.getMapAsync('token');
+    const token: any = await MMKVWithToken.getMapAsync('token');
     return token;
   } catch (e) {
     throw e;
@@ -154,10 +149,13 @@ const fetchAllBook = async (url: string) => {
 };
 
 const getIndexBook = (index: number, prev: any) => {
-  if (prev && !prev.data) {
+  if (prev && prev.total === 1) {
     return null;
   }
-  return `https://beta.lovehug.net/api/user/allbook?page${index}`;
+  if (prev && !prev.data.length) {
+    return null;
+  }
+  return `/api/user/allbook?page=${index}`;
 };
 
 const useBook = () => {
@@ -167,15 +165,15 @@ const useBook = () => {
   );
 
   const isLoading = !data && !error;
-  const isTotal = !isLoading ? data?.[0]?.page : null;
+  const isTotal = !isLoading ? data?.[0]?.total : null;
   const isContent = data ? data : [];
   const isEmpty = data ? data?.[0]?.data.length === 0 : false;
 
   const isData: dt = {};
-  for (let i = 0; i < isContent.length; i++) {
-    const datas = isContent[i].data;
+  for (let i = 0; i < isContent?.length; i++) {
+    const datas: manga[] = isContent[i].data;
     for (let d = 0; d < datas.length; d++) {
-      isData[datas[d].id] = datas[d];
+      isData[datas[d].slug] = datas[d];
     }
   }
 
