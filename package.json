@@ -23,7 +23,7 @@
     "react-native-applovin-max": "^1.1.6",
     "react-native-fast-image": "^8.3.4",
     "react-native-intersection-observer": "^0.0.7",
-    "react-native-mmkv-storage": "^0.5.2",
+    "react-native-mmkv-storage": "0.4.4",
     "react-native-navigation": "^7.11.2",
     "react-native-onesignal": "^4.0.5",
     "react-native-read-more-text": "^1.1.2",
