@@ -85,7 +85,12 @@ if (!__DEV__) {
     dsn:
       'https://cb4a2f6cbc904f8b829799180f887f4f@o121589.ingest.sentry.io/5661451',
     integrations: new Sentry.ReactNativeTracing({
-      tracingOrigins: ['localhost', 'beta.lovehug.net', /^\//],
+      tracingOrigins: [
+        'localhost',
+        'beta.lovehug.net',
+        'api-geolocation.zeit.sh',
+        /^\//,
+      ],
     }),
     tracesSampleRate: 1.0,
   });
