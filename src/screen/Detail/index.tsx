@@ -4,8 +4,6 @@ import instance from 'utils/instance';
 import useSWR from 'swr';
 import Error from 'component/Error';
 import Loading from 'component/Loading';
-import Chapter from 'component/Chapter';
-// import DetailManga from 'component/DetailManga';
 import Image from 'react-native-fast-image';
 import styles from './styles';
 import {
@@ -27,11 +25,11 @@ interface props {
 }
 
 const DetailManga = React.lazy(() => import('@component/DetailManga'));
+const Chapter = React.lazy(() => import('@component/Chapter'));
 
 const Detail: React.FC<props> = (props) => {
   const {error, data} = useSWR(`/api/manga/detail/${props.id}`, fetcher);
   const state = useMangaHistory(props.componentId, props.id);
-
 
   const value = useRef<Animated.Value>(new Animated.Value(100)).current;
 
@@ -87,7 +85,10 @@ const Detail: React.FC<props> = (props) => {
           fallback={<Loading ActivityProps={{size: 15, color: '#fff'}} />}>
           <DetailManga componentId={props.componentId} data={data.content} />
         </React.Suspense>
-        <Chapter componentId={props.componentId} id={props.id} />
+        <React.Suspense
+          fallback={<Loading ActivityProps={{size: 15, color: '#fff'}} />}>
+          <Chapter componentId={props.componentId} id={props.id} />
+        </React.Suspense>
       </Animated.ScrollView>
       {state ? (
         <Animated.View

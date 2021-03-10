@@ -1,81 +1,3 @@
-// import React, {useCallback, useState} from 'react';
-// import {FlatList as Flat} from '@stream-io/flat-list-mvcp';
-// import {useRegisterHistory} from 'utils/hook/navigation';
-// import {ActivityIndicator, Animated, Pressable} from 'react-native';
-// import instance from 'utils/instance';
-// import useSWR, {useSWRInfinite} from 'swr';
-// import Loading from 'component/Loading';
-// // @ts-ignore
-// import ReactNativeZoomableView from '@dudigital/react-native-zoomable-view/src/ReactNativeZoomableView';
-//
-// interface props {
-//   componentId: string;
-//   mid: number;
-//   chapter: number;
-//   id: number;
-// }
-//
-// const ImageReader = React.lazy(() => import('@component/ImageReader'));
-//
-// const FlatList = Animated.createAnimatedComponent(Flat);
-//
-// const fetcher = (url: string) =>
-//   instance.get(url).then((results) => results.data);
-//
-// const Reader: React.FC<props> = (props) => {
-//   const {} = useSWRInfinite((a) => {
-//     console.log(a);
-//     return `/api/manga/content/${props.id}`;
-//   }, fetcher);
-//   const {data, error} = useSWR(`/api/manga/content/${props.id}`, fetcher);
-//   useRegisterHistory(props.componentId, props.mid, props.chapter, props.id);
-//   const [state, setState] = useState<string[] | any>([]);
-//
-//   const renderItem = useCallback(
-//     ({item, index}: {item: string | any; index: number}) => {
-//       return (
-//         <React.Suspense key={index} fallback={<ActivityIndicator />}>
-//           <ImageReader url={item} />
-//         </React.Suspense>
-//       );
-//     },
-//     [],
-//   );
-//
-//   if (!data) {
-//     return <Loading ActivityProps={{color: '#fff', size: 25}} />;
-//   }
-//
-//   const results = [...data.content.content, ...state];
-//
-//   return (
-//     <ReactNativeZoomableView
-//       maxZoom={2}
-//       minZoom={1}
-//       zoomStep={0.5}
-//       initialZoom={1}
-//       bindToBorders={true}>
-//       <FlatList
-//         maintainVisibleContentPosition={{
-//           autoscrollToTopThreshold: 10,
-//           minIndexForVisible: 1,
-//         }}
-//         onEndReachedThreshold={0.01}
-//         data={results || []}
-//         keyExtractor={(item, index) => `${item} + ${index}`}
-//         renderItem={renderItem}
-//         onEndReached={() => {
-//           if (data.next) {
-//             setState(data.next.content);
-//           }
-//         }}
-//       />
-//     </ReactNativeZoomableView>
-//   );
-// };
-//
-// export default Reader;
-
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {
   LayoutChangeEvent,
@@ -87,7 +9,7 @@ import {
 } from 'react-native';
 import useSWR from 'swr';
 import instance from 'utils/instance';
-import {useRegisterHistory} from 'utils/hook/navigation';
+import {useRegisterHistory, useAdsIntertitial} from 'utils/hook/navigation';
 import {WebView} from 'react-native-webview';
 import Error from 'component/Error';
 import styles from './styles';
@@ -95,6 +17,7 @@ import html from 'utils/html';
 import {WebViewScrollEvent} from 'react-native-webview/lib/WebViewTypes';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {Navigation} from 'react-native-navigation';
+// @ts-ignore
 
 interface props {
   componentId: string;
@@ -102,8 +25,6 @@ interface props {
   chapter: number;
   id: number;
 }
-
-// const Image = React.lazy(() => import('@component/ImageReader'));
 
 const fetcher = (url: string) =>
   instance.get(url).then((results) => results.data);
@@ -254,6 +175,8 @@ const Reader: React.FC<props> = (props) => {
       });
     }
   };
+
+  useAdsIntertitial(props.componentId);
 
   if (isError) {
     return <Error title={'Failed Fetch'} code={404} />;

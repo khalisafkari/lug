@@ -1,15 +1,11 @@
 import React from 'react';
-import {Pressable, Text, View} from 'react-native';
+import {View} from 'react-native';
 import instance from 'utils/instance';
 import useSWR from 'swr';
 import Error from 'component/Error';
 import Loading from 'component/Loading';
 import {chapter} from '../../../typed';
 import ChapterItem from 'component/ChapterItem';
-import {
-  useNavigationcomponentDidDisappear,
-  useNavigationcomponentDidAppear,
-} from '@utils/hook/navigation';
 
 interface props {
   componentId: string;

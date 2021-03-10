@@ -15,6 +15,7 @@ interface props {
 
 const Slide = React.lazy(() => import('@component/Slide'));
 const MultiComponent = React.lazy(() => import('@component/Multi'));
+const AdBanner = React.lazy(() => import('@component/AdBanner'));
 
 const Home: React.FC<props> = ({componentId}) => {
   const {data, error} = useSWR('/api/manga', fetcher);
@@ -40,7 +41,13 @@ const Home: React.FC<props> = ({componentId}) => {
 
   const renderItem = (item: string, index: number) => {
     if (item === 'slide') {
-      return null;
+      return (
+        <React.Suspense
+          key={index}
+          fallback={<Loading ActivityProps={{color: '#fff', size: 15}} />}>
+          <AdBanner adUnitId={'d773ffd30b135160'} />
+        </React.Suspense>
+      );
     } else if (item === 'top comment') {
       return (
         <React.Suspense

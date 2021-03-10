@@ -9,6 +9,8 @@ import {MMKVwithIDCHapter, MMKVwithChapterHistory} from 'utils/database/mmkv';
 import {manga} from '../../../typed';
 import instance from 'utils/instance';
 import useSWR from 'swr';
+// @ts-ignore
+import AppLovinMAX from 'react-native-applovin-max';
 
 type EventHandlerComponentDidDisappearEvent = (
   event: ComponentDidDisappearEvent,
@@ -137,6 +139,67 @@ const useMangaHistoryAll = (componentId: string) => {
   return state;
 };
 
+const useAdsIntertitial = (component: string) => {
+  const [retryAttempt, setRetryAttempt] = useState<number>(0);
+
+  const initializeRewardedAds = () => {
+    AppLovinMAX.addEventListener('OnRewardedAdLoadedEvent', () => {
+      setRetryAttempt(0);
+    });
+    AppLovinMAX.addEventListener('OnRewardedAdLoadFailedEvent', () => {
+      setRetryAttempt(retryAttempt + 1);
+      var retryDelay = Math.pow(2, Math.min(6, retryAttempt));
+
+      console.log(
+        'Rewarded ad failed to load - retrying in ' + retryDelay + 's',
+      );
+
+      setTimeout(function () {
+        loadRewardedAd();
+      }, retryDelay * 1000);
+    });
+    AppLovinMAX.addEventListener('OnRewardedAdClickedEvent', () => {});
+    AppLovinMAX.addEventListener('OnRewardedAdDisplayedEvent', () => {});
+    AppLovinMAX.addEventListener('OnRewardedAdFailedToDisplayEvent', () => {
+      loadRewardedAd();
+    });
+    AppLovinMAX.addEventListener('OnRewardedAdHiddenEvent', () => {
+      loadRewardedAd();
+    });
+    AppLovinMAX.addEventListener('OnRewardedAdReceivedRewardEvent', () => {
+      // Rewarded ad was displayed and user should receive the reward
+    });
+    loadRewardedAd();
+  };
+
+  const loadRewardedAd = () => {
+    AppLovinMAX.loadRewardedAd('32e299e6aa39a5ba');
+  };
+
+  const removeListener = () => {
+    AppLovinMAX.removeEventListener('OnRewardedAdLoadedEvent');
+    AppLovinMAX.removeEventListener('OnRewardedAdLoadFailedEvent');
+    AppLovinMAX.removeEventListener('OnRewardedAdClickedEvent');
+    AppLovinMAX.removeEventListener('OnRewardedAdDisplayedEvent');
+    AppLovinMAX.removeEventListener('OnRewardedAdFailedToDisplayEvent');
+    AppLovinMAX.removeEventListener('OnRewardedAdHiddenEvent');
+    AppLovinMAX.removeEventListener('OnRewardedAdReceivedRewardEvent');
+  };
+
+  useNavigationcomponentDidAppear(() => {
+    initializeRewardedAds();
+  }, component);
+
+  useNavigationcomponentDidDisappear(() => {
+    if (AppLovinMAX.isRewardedAdReady('32e299e6aa39a5ba')) {
+      AppLovinMAX.showRewardedAd('32e299e6aa39a5ba');
+    }
+    removeListener();
+  }, component);
+
+  return;
+};
+
 export {
   useNavigationcomponentDidAppear,
   useNavigationcomponentDidDisappear,
@@ -144,4 +207,5 @@ export {
   useRegisterHistory,
   useMangaHistory,
   useMangaHistoryAll,
+  useAdsIntertitial,
 };
