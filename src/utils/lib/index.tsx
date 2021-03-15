@@ -4,6 +4,7 @@ import useSWR, {useSWRInfinite} from 'swr';
 import {isData as dt, manga} from '../../../typed';
 import {RouteDefault, RouteProtect} from 'utils/route';
 import {ToastAndroid} from 'react-native';
+import * as Sentry from '@sentry/react-native';
 
 interface post {
   manga: number | null;
@@ -30,6 +31,7 @@ const saveToken = async (payload: getToken) => {
   } catch (e) {
     const error = new Error();
     error.message = 'failed';
+    Sentry.captureException(error);
     throw error;
   }
 };
@@ -39,6 +41,7 @@ const getToken = async (): Promise<getToken | object | null> => {
     const token: any = await MMKVWithToken.getMapAsync('token');
     return token;
   } catch (e) {
+    Sentry.captureException(e);
     throw e;
   }
 };
@@ -86,6 +89,7 @@ const onLoginUser = async (email: string, password: string) => {
     const error: any = new Error(e);
     error.message = 'failed';
     error.status = 404;
+    Sentry.captureException(error);
     throw error;
   }
 };
@@ -105,6 +109,7 @@ const saveBookmarkId = async (id: number) => {
     error.message = 'failed token';
     throw error;
   } catch (e) {
+    Sentry.captureException(e);
     throw e;
   }
 };
@@ -124,6 +129,7 @@ const removeBookmarkId = async (id: number) => {
     error.message = 'failed token';
     throw error;
   } catch (e) {
+    Sentry.captureException(e);
     throw e;
   }
 };
@@ -144,6 +150,7 @@ const fetchAllBook = async (url: string) => {
     error.status = 403;
     throw error;
   } catch (e) {
+    Sentry.captureException(e);
     throw e;
   }
 };
@@ -194,6 +201,7 @@ const onLogout = async () => {
     await MMKVWithToken.clearStore();
     return;
   } catch (e) {
+    Sentry.captureException(e);
     throw e;
   }
 };
@@ -223,6 +231,7 @@ const onSendComment = async (t: post) => {
     error.status = 403;
     throw error;
   } catch (e) {
+    Sentry.captureException(e);
     throw e;
   }
   //{"content":"khalis","c_id":0,"delete_comment":0,"edited":0}
@@ -235,6 +244,7 @@ const getCountry = async () => {
     const data = await country.json();
     return data;
   } catch (e) {
+    Sentry.captureException(e);
     throw e;
   }
 };

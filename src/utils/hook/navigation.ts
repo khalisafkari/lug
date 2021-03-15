@@ -149,11 +149,6 @@ const useAdsIntertitial = (component: string) => {
     AppLovinMAX.addEventListener('OnRewardedAdLoadFailedEvent', () => {
       setRetryAttempt(retryAttempt + 1);
       var retryDelay = Math.pow(2, Math.min(6, retryAttempt));
-
-      console.log(
-        'Rewarded ad failed to load - retrying in ' + retryDelay + 's',
-      );
-
       setTimeout(function () {
         loadRewardedAd();
       }, retryDelay * 1000);

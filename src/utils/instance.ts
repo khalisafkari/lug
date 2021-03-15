@@ -21,7 +21,7 @@ instance.interceptors.request.use(
     }
   },
   (error) => {
-    Sentry.nativeCrash();
+    Sentry.captureException(error);
     return Promise.reject(error);
   },
 );
@@ -44,7 +44,7 @@ instance.interceptors.response.use(
       httpMetric.setResponseContentType(error.response.headers['content-type']);
       await httpMetric.stop();
     } finally {
-      Sentry.nativeCrash();
+      Sentry.captureException(error);
       return Promise.reject(error);
     }
   },

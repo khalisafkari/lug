@@ -47,9 +47,15 @@ Navigation.setLazyComponentRegistrator((componentName) => {
   }
 });
 
+const routingInstrumentation = new Sentry.RoutingInstrumentation();
+
 Navigation.events().registerComponentDidDisappearListener(
   async ({componentName, componentType}) => {
     if (componentType === 'Component') {
+      routingInstrumentation.onRouteWillChange({
+        name: componentName,
+        op: 'navigation',
+      });
       await analytics().logScreenView({
         screen_name: componentName,
         screen_class: componentName,
@@ -84,15 +90,21 @@ Navigation.setDefaultOptions({
 Sentry.init({
   dsn:
     'https://cb4a2f6cbc904f8b829799180f887f4f@o121589.ingest.sentry.io/5661451',
-  integrations: new Sentry.ReactNativeTracing({
-    tracingOrigins: [
-      'localhost',
-      'beta.lovehug.net',
-      'api-geolocation.zeit.sh',
-      /^\//,
-    ],
-  }),
+  integrations: [
+    new Sentry.ReactNativeTracing({
+      routingInstrumentation,
+      tracingOrigins: [
+        'localhost',
+        'beta.lovehug.net',
+        'api-geolocation.zeit.sh',
+        /^\//,
+      ],
+    }),
+  ],
+  debug: __DEV__,
   tracesSampleRate: 1.0,
+  autoSessionTracking: true,
+  environment: __DEV__ ? 'development' : 'production',
 });
 
 AppLovinMAX.initialize(
