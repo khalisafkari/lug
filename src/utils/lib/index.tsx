@@ -246,7 +246,6 @@ const verifyCountry = (country: country) => {
       country.country.toLowerCase() === 'japan'
     ) {
       RouteDefault();
-      // RouteProtect();
     } else {
       RouteProtect();
     }
