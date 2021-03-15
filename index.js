@@ -81,25 +81,23 @@ Navigation.setDefaultOptions({
   },
 });
 
-if (!__DEV__) {
-  Sentry.init({
-    dsn:
-      'https://cb4a2f6cbc904f8b829799180f887f4f@o121589.ingest.sentry.io/5661451',
-    integrations: new Sentry.ReactNativeTracing({
-      tracingOrigins: [
-        'localhost',
-        'beta.lovehug.net',
-        'api-geolocation.zeit.sh',
-        /^\//,
-      ],
-    }),
-    tracesSampleRate: 1.0,
-  });
-}
+Sentry.init({
+  dsn:
+    'https://cb4a2f6cbc904f8b829799180f887f4f@o121589.ingest.sentry.io/5661451',
+  integrations: new Sentry.ReactNativeTracing({
+    tracingOrigins: [
+      'localhost',
+      'beta.lovehug.net',
+      'api-geolocation.zeit.sh',
+      /^\//,
+    ],
+  }),
+  tracesSampleRate: 1.0,
+});
 
 AppLovinMAX.initialize(
   'ioiA26xeiE7sp2y_ooxmzkBikQXzCG2GIIv3T2VKprroz_-gccPp6TZXuZbivFqOP2a3n02TC9W5yDJK3O4QGm',
-  (configuration) => {},
+  () => {},
 );
 
 OneSignal.setAppId('deffad9f-2bd8-404e-ba0e-0d8829522aa4');
