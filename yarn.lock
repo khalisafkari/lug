@@ -1108,23 +1108,23 @@
   resolved "https://registry.yarnpkg.com/@react-native-community/eslint-plugin/-/eslint-plugin-1.1.0.tgz#e42b1bef12d2415411519fd528e64b593b1363dc"
   integrity sha512-W/J0fNYVO01tioHjvYWQ9m6RgndVtbElzYozBq1ZPrHO/iCzlqoySHl4gO/fpCl9QEFjvJfjPgtPMTMlsoq5DQ==
 
-"@react-native-firebase/analytics@^11.0.0":
-  version "11.0.0"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/analytics/-/analytics-11.0.0.tgz#cfcf9984002756c61d65bf13cac6018d9951046d"
-  integrity sha512-d1jCdoZoueZeQL6fiSZTx69AvjppbPs3RMLB299cMbmCxcCgEvTTw/C6Tr73+8PMVeju64IWTrm8HRwTGhk7Tw==
+"@react-native-firebase/analytics@^11.1.0":
+  version "11.1.0"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/analytics/-/analytics-11.1.0.tgz#420cbe70aae4e96a5546590c0836adec178065a6"
+  integrity sha512-+89e6oWa9RxWThPoTDe6/qTLLscyli4kv584CxPuSBIMikRYR2nOE7EIKkbCYTtt9TayG5Qd99mPeGyYrk0eGg==
 
-"@react-native-firebase/app@^11.0.0":
-  version "11.0.0"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/app/-/app-11.0.0.tgz#dee23fd79efa42c008306d2e9163afd9391f1567"
-  integrity sha512-jsystyGQX8Vx8w32YTySJGNwBNeRpEvUIxa+u7GWR8MngkwenyJOGwGT+5sHxZwJUGQl3X/7i1UKWzcrSDG5jg==
+"@react-native-firebase/app@^11.1.0":
+  version "11.1.0"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/app/-/app-11.1.0.tgz#08802784d68038c83568ea02a910ed1d64432535"
+  integrity sha512-jZrPjwFxUaayugU5sqk98VYejwkRzhS+eaiHOegdSGbHMMcUBR5vIl7HuEjtvwfd5u6dvJWnstHk237fvwwFZQ==
   dependencies:
     opencollective-postinstall "^2.0.1"
     superstruct "^0.6.2"
 
-"@react-native-firebase/perf@^11.0.0":
-  version "11.0.0"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/perf/-/perf-11.0.0.tgz#f99b82af03b0c6c87bc5f081a1e3aab632bc28eb"
-  integrity sha512-8gNnsXH+Sxf0M1DDMnquuSKAKQPxnlQg0NNwzL2PgdNl7Q2OxkAWaLH0TuDJxqHXuZycD4nzHoDsh6GbjA5Gjg==
+"@react-native-firebase/perf@^11.1.0":
+  version "11.1.0"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/perf/-/perf-11.1.0.tgz#136a3fc6e58b4a1bf9d86484744d32223b36ce10"
+  integrity sha512-ynwU86HBF6oQodtK9GIRLMDK4KgYtHv77+QKoePCQjl1sbqDFdm9MgwsZhQOjNI2e6Rz13F78OM7dwFxo9SwgQ==
 
 "@sentry/browser@6.2.1":
   version "6.2.1"
@@ -2654,11 +2654,6 @@ deprecated-prop-type@^1.0.0:
   integrity sha512-Hp4VxvZN6IlbKvleZfbdrojOmnPXuRPjC9cQ82j6bdI3DRCwGR+7CEf367X59MHz/y8Ao/mxdP7YyR3KTb+EhQ==
   dependencies:
     warning "4.0.1"
-
-dequal@2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/dequal/-/dequal-2.0.2.tgz#85ca22025e3a87e65ef75a7a437b35284a7e319d"
-  integrity sha512-q9K8BlJVxK7hQYqa6XISGmBZbtQQWVXSrRrWreHC94rMt1QL/Impruc+7p2CYSYuVIUr+YCt6hjrs1kkdJRTug==
 
 destroy@~1.0.4:
   version "1.0.4"
@@ -6085,10 +6080,9 @@ react-lifecycles-compat@2.0.0:
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-2.0.0.tgz#71d9c4cde47114c4102454f76da055c2bc48c948"
   integrity sha512-txfpPCQYiazVdcbMRhatqWKcAxJweUu2wDXvts5/7Wyp6+Y9cHojqXHsLPEckzutfHlxZhG8Oiundbmp8Fd6eQ==
 
-react-native-applovin-max@^1.1.6:
+"react-native-applovin-max@https://github.com/khalisafkari/AppLovin-MAX-React-Native":
   version "1.1.6"
-  resolved "https://registry.yarnpkg.com/react-native-applovin-max/-/react-native-applovin-max-1.1.6.tgz#3b468eb37eb037a0e51e915c0ae77926bf206b6b"
-  integrity sha512-OeYWUo8ZWJTD/VGDSh494tolivQcxeGO30Mhtia6laCmXLFzkhb2E+9J2hSo7n3u/nMk4q2TF/Q+6FwnyzeRrg==
+  resolved "https://github.com/khalisafkari/AppLovin-MAX-React-Native#640011526d65fb340a2020c7272978a0ef16a51d"
 
 react-native-fast-image@^8.3.4:
   version "8.3.4"
@@ -6161,10 +6155,10 @@ react-native-vector-icons@^8.1.0:
     prop-types "^15.7.2"
     yargs "^16.1.1"
 
-react-native-webview@^11.2.3:
-  version "11.2.3"
-  resolved "https://registry.yarnpkg.com/react-native-webview/-/react-native-webview-11.2.3.tgz#1b82685ab60645d4161f2e25e98286493cdffa5d"
-  integrity sha512-r/K+Lf/O5aij72gRndMX2qsyQ/WLtDPiO75SS57y6JjqSKxedGASVL9Jwl1TM7fCXqUq8dgiwik/LuBHbJXAEg==
+react-native-webview@^11.2.4:
+  version "11.2.4"
+  resolved "https://registry.yarnpkg.com/react-native-webview/-/react-native-webview-11.2.4.tgz#4615648cea9d928e5d59dc5d8b031167841b8dd6"
+  integrity sha512-8C0HHNVhM3GlhtC30fO+sbH5J83zTRdi5qzdP2IvDV9tS0S0ZNPi97GJHjcIRc4dAtIoyn6NHdN5xREKGQZU9w==
   dependencies:
     escape-string-regexp "2.0.0"
     invariant "2.2.4"
@@ -7122,12 +7116,10 @@ supports-hyperlinks@^2.0.0:
     has-flag "^4.0.0"
     supports-color "^7.0.0"
 
-swr@^0.5.0:
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/swr/-/swr-0.5.0.tgz#08648a752230a034cab7bb307c0b89af6f0efbba"
-  integrity sha512-zybQScVRZcEfZ6wXJJXvHrbooLs/XepV5Zoaz7o6esheDiQotEd0y56AwNJ2QBiPo2G/AbdhIC2Dm0csYpJrJQ==
-  dependencies:
-    dequal "2.0.2"
+swr@^0.5.3:
+  version "0.5.3"
+  resolved "https://registry.yarnpkg.com/swr/-/swr-0.5.3.tgz#7290a9a61329d930583ef365317e636b8dbaa8bb"
+  integrity sha512-RUE3RWn3jt9e4qLPat2A9vbHG/5N6konsc27xKjE65jFSiGv0P7HLD8IGvwAv6DRKktL7Od2UcayX0plKb2awg==
 
 symbol-tree@^3.2.2:
   version "3.2.4"

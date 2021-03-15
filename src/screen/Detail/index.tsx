@@ -26,6 +26,7 @@ interface props {
 
 const DetailManga = React.lazy(() => import('@component/DetailManga'));
 const Chapter = React.lazy(() => import('@component/Chapter'));
+const AdBanner = React.lazy(() => import('@component/AdBanner'));
 
 const Detail: React.FC<props> = (props) => {
   const {error, data} = useSWR(`/api/manga/detail/${props.id}`, fetcher);
@@ -88,6 +89,10 @@ const Detail: React.FC<props> = (props) => {
         <React.Suspense
           fallback={<Loading ActivityProps={{size: 15, color: '#fff'}} />}>
           <Chapter componentId={props.componentId} id={props.id} />
+        </React.Suspense>
+        <React.Suspense
+          fallback={<Loading ActivityProps={{color: '#fff', size: 15}} />}>
+          <AdBanner style={{marginTop: 0}} adUnitId={'d773ffd30b135160'} />
         </React.Suspense>
       </Animated.ScrollView>
       {state ? (

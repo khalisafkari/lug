@@ -173,7 +173,7 @@ apply from: file("../../node_modules/@react-native-community/cli-platform-androi
 
 buildscript {
     repositories {
-        maven { url 'https://applovin.bintray.com/Quality-Service' }
+        maven { url 'https://artifacts.applovin.com/android' }
     }
     dependencies {
         classpath "com.applovin.quality:AppLovinQualityServiceGradlePlugin:3.+"
