@@ -9,6 +9,8 @@ import styles from './styles';
 import OneSignal, {DeviceState} from 'react-native-onesignal';
 import useSWR from 'swr';
 import * as Sentry from '@sentry/react-native';
+import VersionCheck from 'react-native-version-check';
+import instance from 'utils/instance';
 
 interface props {
   componentId: string;
@@ -19,12 +21,30 @@ const fetcherOneSignal = async (): Promise<DeviceState> => {
     const isUser = await OneSignal.getDeviceState();
     return isUser;
   } catch (e) {
+    Sentry.captureException(e);
+    throw e;
+  }
+};
+
+const fetchUpdate = async () => {
+  try {
+    // @ts-ignore
+    const update = await VersionCheck.needUpdate<any>({
+      provider: () =>
+        instance
+          .get('https://api.github.com/repos/khalisafkari/lug/releases/latest')
+          .then(({data}) => data.tag_name),
+    });
+    return update;
+  } catch (e) {
+    Sentry.captureException(e);
     throw e;
   }
 };
 
 const Profile: React.FC<props> = (props) => {
   const {data, error, mutate} = useSWR('_onesignal_', fetcherOneSignal);
+  const {data: update, error: update_error} = useSWR('_update_', fetchUpdate);
 
   const onBookmark = useCallback(() => {
     Navigation.push(props.componentId, {
@@ -92,6 +112,24 @@ const Profile: React.FC<props> = (props) => {
           <Text style={styles.menuLabel}>LOGOUT</Text>
           <Ionic name={'log-out'} size={25} color={'#772953'} />
         </Pressable>
+        {!update && !update_error ? null : error ? null : update?.isNeeded ? (
+          <Pressable
+            onPress={() => {
+              OnLinking('https://kutt.it/lovehugapk');
+            }}
+            style={styles.menuWrapper}>
+            <Text style={styles.menuLabel}>
+              UPDATE <Text style={{color: 'red'}}>Available</Text>
+            </Text>
+            <Text style={styles.menuLabel}>
+              {update?.currentVersion}
+              <Text style={{fontWeight: 'bold', fontSize: 15, width: 10}}>
+                {' > '}
+              </Text>
+              <Text style={{color: 'red'}}>{update?.latestVersion}</Text>
+            </Text>
+          </Pressable>
+        ) : null}
       </View>
       <View style={styles.socialContainer}>
         <Pressable

@@ -139,6 +139,11 @@ dependencies {
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
     implementation 'org.chromium:v8-android:+'
+    implementation 'com.applovin.mediation:adcolony-adapter:+'
+    implementation 'com.applovin.mediation:facebook-adapter:+'
+    implementation 'com.android.support:recyclerview-v7:28.+'
+    implementation 'com.android.support:appcompat-v7:28.+'
+    implementation 'com.applovin.mediation:mintegral-adapter:+'
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
       exclude group:'com.facebook.fbjni'

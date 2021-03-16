@@ -92,7 +92,11 @@ const Detail: React.FC<props> = (props) => {
         </React.Suspense>
         <React.Suspense
           fallback={<Loading ActivityProps={{color: '#fff', size: 15}} />}>
-          <AdBanner style={{marginTop: 0}} adUnitId={'d773ffd30b135160'} />
+          <AdBanner
+            adType={'banner'}
+            style={{marginTop: 0}}
+            adUnitId={'d773ffd30b135160'}
+          />
         </React.Suspense>
       </Animated.ScrollView>
       {state ? (

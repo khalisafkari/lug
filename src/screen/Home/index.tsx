@@ -45,7 +45,11 @@ const Home: React.FC<props> = ({componentId}) => {
         <React.Suspense
           key={index}
           fallback={<Loading ActivityProps={{color: '#fff', size: 15}} />}>
-          <AdBanner adUnitId={'d773ffd30b135160'} />
+          <AdBanner
+            style={{height: 250}}
+            adType={'mrec'}
+            adUnitId={'a351d70102cc3f27'}
+          />
         </React.Suspense>
       );
     } else if (item === 'top comment') {
