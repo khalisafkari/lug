@@ -1,8 +1,4 @@
-import analytics from '@react-native-firebase/analytics';
-import AppLovinMAX from 'react-native-applovin-max';
-import * as Sentry from '@sentry/react-native';
 import {Navigation} from 'react-native-navigation';
-import OneSignal from 'react-native-onesignal';
 import Home from '@screen/Home';
 import Detail from '@screen/Detail';
 import Reader from '@screen/Reader';
@@ -17,6 +13,11 @@ import Bookmark from '@screen/Bookmark';
 import Splash from '@screen/Splash';
 import Protect from '@screen/Protect';
 import {RouteSplash} from '@utils/route';
+
+import analytics from '@react-native-firebase/analytics';
+import AppLovinMAX from 'react-native-applovin-max';
+import * as Sentry from '@sentry/react-native';
+import OneSignal from 'react-native-onesignal';
 
 Navigation.registerComponent('com.home', () => Home);
 Navigation.registerComponent('com.list', () => List);
@@ -109,7 +110,8 @@ Sentry.init({
 
 AppLovinMAX.initialize(
   'ioiA26xeiE7sp2y_ooxmzkBikQXzCG2GIIv3T2VKprroz_-gccPp6TZXuZbivFqOP2a3n02TC9W5yDJK3O4QGm',
-  () => {},
+  () => {
+  },
 );
 
 OneSignal.setAppId('deffad9f-2bd8-404e-ba0e-0d8829522aa4');

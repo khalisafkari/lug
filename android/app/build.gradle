@@ -73,6 +73,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
     }
     splits {
         abi {
@@ -139,6 +140,7 @@ dependencies {
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
     implementation 'org.chromium:v8-android:+'
+
     implementation 'com.applovin.mediation:adcolony-adapter:+'
     implementation 'com.applovin.mediation:facebook-adapter:+'
     implementation 'com.android.support:recyclerview-v7:28.+'

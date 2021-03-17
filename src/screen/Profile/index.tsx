@@ -10,7 +10,7 @@ import OneSignal, {DeviceState} from 'react-native-onesignal';
 import useSWR from 'swr';
 import * as Sentry from '@sentry/react-native';
 import VersionCheck from 'react-native-version-check';
-import instance from 'utils/instance';
+import analytics from '@react-native-firebase/analytics';
 
 interface props {
   componentId: string;
@@ -28,13 +28,7 @@ const fetcherOneSignal = async (): Promise<DeviceState> => {
 
 const fetchUpdate = async () => {
   try {
-    // @ts-ignore
-    const update = await VersionCheck.needUpdate<any>({
-      provider: () =>
-        instance
-          .get('https://api.github.com/repos/khalisafkari/lug/releases/latest')
-          .then(({data}) => data.tag_name),
-    });
+    const update = await VersionCheck.needUpdate({});
     return update;
   } catch (e) {
     Sentry.captureException(e);
@@ -85,6 +79,12 @@ const Profile: React.FC<props> = (props) => {
 
   const OnLinking = (url: string) => {
     Linking.openURL(url);
+    (async () => {
+      await analytics().logEvent('toURL', {
+        url: url,
+        description: 'link click upgrade',
+      });
+    })();
   };
 
   return (
@@ -115,7 +115,11 @@ const Profile: React.FC<props> = (props) => {
         {!update && !update_error ? null : error ? null : update?.isNeeded ? (
           <Pressable
             onPress={() => {
-              OnLinking('https://kutt.it/lovehugapk');
+              OnLinking(
+                update?.storeUrl
+                  ? update.storeUrl
+                  : 'https://kutt.it/lovehugapk',
+              );
             }}
             style={styles.menuWrapper}>
             <Text style={styles.menuLabel}>

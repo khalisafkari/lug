@@ -1,9 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {
   FlatList,
   Pressable,
-  ScrollView,
-  Text,
   TextInput,
   ToastAndroid,
   View,
@@ -15,8 +13,7 @@ import Loading from 'component/Loading';
 import {comments} from '../../../typed';
 import styles from './styles';
 import Icon from 'react-native-vector-icons/Feather';
-import {useNavigationcomponentDidAppear} from 'utils/hook/navigation';
-import {getToken, onSendComment} from 'utils/lib';
+import {onSendComment} from 'utils/lib';
 
 interface props {
   componentId: string;
