@@ -110,8 +110,7 @@ Sentry.init({
 
 AppLovinMAX.initialize(
   'ioiA26xeiE7sp2y_ooxmzkBikQXzCG2GIIv3T2VKprroz_-gccPp6TZXuZbivFqOP2a3n02TC9W5yDJK3O4QGm',
-  () => {
-  },
+  () => {},
 );
 
 OneSignal.setAppId('deffad9f-2bd8-404e-ba0e-0d8829522aa4');
