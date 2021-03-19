@@ -17,7 +17,6 @@ import html from 'utils/html';
 import {WebViewScrollEvent} from 'react-native-webview/lib/WebViewTypes';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {Navigation} from 'react-native-navigation';
-// @ts-ignore
 
 interface props {
   componentId: string;

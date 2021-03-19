@@ -15,7 +15,7 @@ import Protect from '@screen/Protect';
 import {RouteSplash} from '@utils/route';
 
 import analytics from '@react-native-firebase/analytics';
-import AppLovinMAX from 'react-native-applovin-max';
+import Tapdaq from 'react-native-tapdaq';
 import * as Sentry from '@sentry/react-native';
 import OneSignal from 'react-native-onesignal';
 
@@ -108,9 +108,9 @@ Sentry.init({
   environment: __DEV__ ? 'development' : 'production',
 });
 
-AppLovinMAX.initialize(
-  'ioiA26xeiE7sp2y_ooxmzkBikQXzCG2GIIv3T2VKprroz_-gccPp6TZXuZbivFqOP2a3n02TC9W5yDJK3O4QGm',
-  () => {},
-);
+Tapdaq.initialize(
+  '6052cf2e08fe6c2d735d6553',
+  '6b290f78-f553-4f91-86cc-bcb5a4f3aed1',
+).then(() => {});
 
 OneSignal.setAppId('deffad9f-2bd8-404e-ba0e-0d8829522aa4');

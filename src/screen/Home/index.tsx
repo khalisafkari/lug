@@ -6,6 +6,7 @@ import Error from 'component/Error';
 import Loading from 'component/Loading';
 import {useNavigationcomponentDidAppear} from 'utils/hook/navigation';
 import {Navigation} from 'react-native-navigation';
+import {AdFormat} from 'react-native-tapdaq';
 
 const fetcher = (url: string) => instance.get(url).then((res) => res.data);
 
@@ -45,11 +46,7 @@ const Home: React.FC<props> = ({componentId}) => {
         <React.Suspense
           key={index}
           fallback={<Loading ActivityProps={{color: '#fff', size: 15}} />}>
-          <AdBanner
-            style={{height: 250}}
-            adType={'mrec'}
-            adUnitId={'a351d70102cc3f27'}
-          />
+          <AdBanner adType={AdFormat.STANDARD} adUnitId={'banner_ad'} />
         </React.Suspense>
       );
     } else if (item === 'top comment') {

@@ -10,9 +10,9 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
-    "@react-native-firebase/analytics": "^11.1.0",
-    "@react-native-firebase/app": "^11.1.0",
-    "@react-native-firebase/perf": "^11.1.0",
+    "@react-native-firebase/analytics": "^11.1.2",
+    "@react-native-firebase/app": "^11.1.2",
+    "@react-native-firebase/perf": "^11.1.2",
     "@sentry/react-native": "^2.2.2",
     "@stream-io/flat-list-mvcp": "^0.0.9",
     "axios": "^0.21.1",
@@ -20,7 +20,6 @@
     "numeral": "^2.0.6",
     "react": "16.13.1",
     "react-native": "0.63.4",
-    "react-native-applovin-max": "https://github.com/khalisafkari/AppLovin-MAX-React-Native",
     "react-native-fast-image": "^8.3.4",
     "react-native-intersection-observer": "^0.0.7",
     "react-native-mmkv-storage": "0.4.4",
@@ -28,6 +27,7 @@
     "react-native-onesignal": "^4.0.5",
     "react-native-read-more-text": "^1.1.2",
     "react-native-render-html": "^5.1.0",
+    "react-native-tapdaq": "https://github.com/khalisafkari/react-native-tapdaq",
     "react-native-v8": "^0.63.4-patch.1",
     "react-native-vector-icons": "^8.1.0",
     "react-native-version-check": "^3.4.2",

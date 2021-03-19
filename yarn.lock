@@ -1108,23 +1108,23 @@
   resolved "https://registry.yarnpkg.com/@react-native-community/eslint-plugin/-/eslint-plugin-1.1.0.tgz#e42b1bef12d2415411519fd528e64b593b1363dc"
   integrity sha512-W/J0fNYVO01tioHjvYWQ9m6RgndVtbElzYozBq1ZPrHO/iCzlqoySHl4gO/fpCl9QEFjvJfjPgtPMTMlsoq5DQ==
 
-"@react-native-firebase/analytics@^11.1.0":
-  version "11.1.1"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/analytics/-/analytics-11.1.1.tgz#c0cd92ce40438099293088e3d9efa45cd0dcb924"
-  integrity sha512-7cD1jBzXiKwkH3TZI/4ZzPGxD8cC96MJShJxZvEAmM+aJP9M/Cqnt3VT5yeywfJSNf2Vyq7OhBDvppFQl7KINQ==
+"@react-native-firebase/analytics@^11.1.2":
+  version "11.1.2"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/analytics/-/analytics-11.1.2.tgz#fe18c2a9697375ef3fb8e637039a01980946265d"
+  integrity sha512-4VhRBFaiRO/uIbPwwVEv9C10dm6jiktVEngNSkAGbrlvxluCb+0N9jUi3Wmc0AEwKjPJqCnSWveBTk0bFil8PQ==
 
-"@react-native-firebase/app@^11.1.0":
-  version "11.1.1"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/app/-/app-11.1.1.tgz#3817afd4a11d8da36f838c02af5d525ecf37371c"
-  integrity sha512-dJfTxCB1FWid5CYTX5bjTDyAWyvi8u3g3OHBBup68rDuuqvE40n1eRFI+5ve4TUr01T1RI1D70M77qyjSHDkrQ==
+"@react-native-firebase/app@^11.1.2":
+  version "11.1.2"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/app/-/app-11.1.2.tgz#b3497c2c242b560f80d168e48cf4dccc6fd54819"
+  integrity sha512-b9FaFu+o3cqpAHF+KCAUMgoREloByQKUudPERmeO31fXvYP74mvZ0ed+KPHR58+Z/eaJ7pRHWH1nMR7X4nKRUQ==
   dependencies:
     opencollective-postinstall "^2.0.1"
     superstruct "^0.6.2"
 
-"@react-native-firebase/perf@^11.1.0":
-  version "11.1.1"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/perf/-/perf-11.1.1.tgz#874bb84c1940e295d6bf300633ad6532f669f6ed"
-  integrity sha512-jx6g57pFqTcqKUoJPI8i+XzWb+YnK/7AuTbISrr3YuBVH5GFJrGk8MJf+fRcY2RLttCZfZcmOgjz6i7IuHM95g==
+"@react-native-firebase/perf@^11.1.2":
+  version "11.1.2"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/perf/-/perf-11.1.2.tgz#afbf0b545be069753fd8ca24b61f4fb174e9425b"
+  integrity sha512-/FtuPRheBW8xcxI9rta4bkHNwLY4QC4azNASB/9Zf84z+PmKiOKl5Z8QKrqRwxc43+kO23Dy4DXb2iVMJIUh/g==
 
 "@sentry/browser@6.2.1":
   version "6.2.1"
@@ -6114,10 +6114,6 @@ react-lifecycles-compat@2.0.0:
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-2.0.0.tgz#71d9c4cde47114c4102454f76da055c2bc48c948"
   integrity sha512-txfpPCQYiazVdcbMRhatqWKcAxJweUu2wDXvts5/7Wyp6+Y9cHojqXHsLPEckzutfHlxZhG8Oiundbmp8Fd6eQ==
 
-"react-native-applovin-max@https://github.com/khalisafkari/AppLovin-MAX-React-Native":
-  version "1.1.6"
-  resolved "https://github.com/khalisafkari/AppLovin-MAX-React-Native#640011526d65fb340a2020c7272978a0ef16a51d"
-
 react-native-fast-image@^8.3.4:
   version "8.3.4"
   resolved "https://registry.yarnpkg.com/react-native-fast-image/-/react-native-fast-image-8.3.4.tgz#79edca177e30311b19d59ff335625bcbe22650d7"
@@ -6167,6 +6163,10 @@ react-native-render-html@^5.1.0:
     htmlparser2 "5.0.1"
     prop-types "^15.7.2"
     stringify-entities "^3.1.0"
+
+"react-native-tapdaq@https://github.com/khalisafkari/react-native-tapdaq":
+  version "0.1.0"
+  resolved "https://github.com/khalisafkari/react-native-tapdaq#d9dc5353776ee83e7a1dacac2ff2e4031150f819"
 
 react-native-v8@^0.63.4-patch.1:
   version "0.63.4-patch.1"

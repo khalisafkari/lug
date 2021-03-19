@@ -6,11 +6,15 @@ import {
 } from 'react-native-navigation';
 import triggerIfComponentIdMatches from './triggerIfComponentIdMatches';
 import {MMKVwithIDCHapter, MMKVwithChapterHistory} from 'utils/database/mmkv';
-import {manga} from '../../../typed';
+import {manga} from '@typed/index';
 import instance from 'utils/instance';
 import useSWR from 'swr';
-// @ts-ignore
-import AppLovinMAX from 'react-native-applovin-max';
+import Tapdaq, {
+  addEventListener,
+  removeEventListener,
+  eventName,
+} from 'react-native-tapdaq';
+import analityc from '@react-native-firebase/analytics';
 
 type EventHandlerComponentDidDisappearEvent = (
   event: ComponentDidDisappearEvent,
@@ -142,54 +146,121 @@ const useMangaHistoryAll = (componentId: string) => {
 const useAdsIntertitial = (component: string) => {
   const [retryAttempt, setRetryAttempt] = useState<number>(0);
 
-  const initializeRewardedAds = () => {
-    AppLovinMAX.addEventListener('OnRewardedAdLoadedEvent', () => {
+  const initializeRewardAds = () => {
+    addEventListener(eventName.didLoad, () => {
       setRetryAttempt(0);
+      analityc().logEvent(eventName.didLoad);
     });
-    AppLovinMAX.addEventListener('OnRewardedAdLoadFailedEvent', () => {
+
+    addEventListener(eventName.didRefresh, () => {
+      analityc().logEvent(eventName.didRefresh);
+    });
+
+    addEventListener(eventName.didFailToRefresh, () => {
+      loadAds();
+      analityc().logEvent(eventName.didFailToRefresh);
+    });
+
+    addEventListener(eventName.willDisplay, () => {
+      analityc().logEvent(eventName.willDisplay);
+    });
+
+    addEventListener(eventName.didDisplay, () => {
+      analityc().logEvent(eventName.didDisplay);
+    });
+
+    addEventListener(eventName.didFailToDisplay, () => {
+      loadAds();
+      analityc().logEvent(eventName.didFailToDisplay);
+    });
+
+    addEventListener(eventName.didClick, () => {
+      analityc().logEvent(eventName.didClick);
+    });
+
+    addEventListener(eventName.didClose, () => {
+      analityc().logEvent(eventName.didClick);
+    });
+
+    addEventListener(eventName.didFailToLoad, () => {
       setRetryAttempt(retryAttempt + 1);
       var retryDelay = Math.pow(2, Math.min(6, retryAttempt));
       setTimeout(function () {
-        loadRewardedAd();
+        loadAds();
       }, retryDelay * 1000);
+      analityc().logEvent(eventName.didFailToLoad);
     });
-    AppLovinMAX.addEventListener('OnRewardedAdClickedEvent', () => {});
-    AppLovinMAX.addEventListener('OnRewardedAdDisplayedEvent', () => {});
-    AppLovinMAX.addEventListener('OnRewardedAdFailedToDisplayEvent', () => {
-      loadRewardedAd();
+
+    addEventListener(eventName.didFailToDisplay, () => {
+      loadAds();
+      analityc().logEvent(eventName.didFailToDisplay);
     });
-    AppLovinMAX.addEventListener('OnRewardedAdHiddenEvent', () => {
-      loadRewardedAd();
+
+    addEventListener(eventName.didClick, () => {
+      analityc().logEvent(eventName.didClick);
     });
-    AppLovinMAX.addEventListener('OnRewardedAdReceivedRewardEvent', () => {
-      // Rewarded ad was displayed and user should receive the reward
+
+    addEventListener(eventName.didClose, () => {
+      analityc().logEvent(eventName.didClose);
     });
-    loadRewardedAd();
+
+    addEventListener(eventName.didComplete, () => {
+      analityc().logEvent(eventName.didComplete);
+    });
+
+    addEventListener(eventName.didEngagement, () => {
+      analityc().logEvent(eventName.didEngagement);
+    });
+
+    addEventListener(eventName.didRewardFail, () => {
+      setRetryAttempt(retryAttempt + 1);
+      var retryDelay = Math.pow(2, Math.min(6, retryAttempt));
+      setTimeout(function () {
+        loadAds();
+      }, retryDelay * 1000);
+      analityc().logEvent(eventName.didRewardFail);
+    });
+
+    addEventListener(eventName.onUserDeclined, () => {
+      loadAds();
+      analityc().logEvent(eventName.onUserDeclined);
+    });
+
+    addEventListener(eventName.didVerify, () => {
+      analityc().logEvent(eventName.didVerify);
+    });
+
+    loadAds();
   };
 
-  const loadRewardedAd = () => {
-    AppLovinMAX.loadRewardedAd('32e299e6aa39a5ba');
+  const loadAds = () => {
+    Tapdaq.loadRewardedVideo('reward_ad');
   };
 
-  const removeListener = () => {
-    AppLovinMAX.removeEventListener('OnRewardedAdLoadedEvent');
-    AppLovinMAX.removeEventListener('OnRewardedAdLoadFailedEvent');
-    AppLovinMAX.removeEventListener('OnRewardedAdClickedEvent');
-    AppLovinMAX.removeEventListener('OnRewardedAdDisplayedEvent');
-    AppLovinMAX.removeEventListener('OnRewardedAdFailedToDisplayEvent');
-    AppLovinMAX.removeEventListener('OnRewardedAdHiddenEvent');
-    AppLovinMAX.removeEventListener('OnRewardedAdReceivedRewardEvent');
+  const removeListen = () => {
+    removeEventListener(eventName.didClick);
+    removeEventListener(eventName.didClose);
+    removeEventListener(eventName.didComplete);
+    removeEventListener(eventName.didDisplay);
+    removeEventListener(eventName.didEngagement);
+    removeEventListener(eventName.didFailToDisplay);
+    removeEventListener(eventName.didFailToLoad);
+    removeEventListener(eventName.didFailToRefresh);
+    removeEventListener(eventName.didLoad);
+    removeEventListener(eventName.didRefresh);
+    removeEventListener(eventName.didRewardFail);
+    removeEventListener(eventName.didVerify);
+    removeEventListener(eventName.onUserDeclined);
+    removeEventListener(eventName.willDisplay);
   };
 
   useNavigationcomponentDidAppear(() => {
-    initializeRewardedAds();
+    initializeRewardAds();
   }, component);
 
   useNavigationcomponentDidDisappear(() => {
-    if (AppLovinMAX.isRewardedAdReady('32e299e6aa39a5ba')) {
-      AppLovinMAX.showRewardedAd('32e299e6aa39a5ba');
-    }
-    removeListener();
+    Tapdaq.showRewardedVideo('reward_ad');
+    removeListen();
   }, component);
 
   return;

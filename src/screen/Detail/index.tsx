@@ -15,6 +15,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import {Navigation} from 'react-native-navigation';
+import {AdFormat} from 'react-native-tapdaq';
 dayjs.extend(relativeTime);
 
 const fetcher = (url: string) => instance.get(url).then((res) => res.data);
@@ -93,9 +94,9 @@ const Detail: React.FC<props> = (props) => {
         <React.Suspense
           fallback={<Loading ActivityProps={{color: '#fff', size: 15}} />}>
           <AdBanner
-            adType={'banner'}
             style={{marginTop: 0}}
-            adUnitId={'d773ffd30b135160'}
+            adType={AdFormat.STANDARD}
+            adUnitId={'banner_ad'}
           />
         </React.Suspense>
       </Animated.ScrollView>
