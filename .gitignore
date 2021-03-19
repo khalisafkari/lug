@@ -39,6 +39,7 @@ node_modules/
 npm-debug.log
 yarn-error.log
 .safedk/
+yarn.lock
 
 # BUCK
 buck-out/
