@@ -1,6 +1,6 @@
 import React from 'react';
 import {Platform, StyleProp, StyleSheet, ViewStyle} from 'react-native';
-import {TapView} from 'react-native-tapdaq';
+import {TapView} from 'react-native-tapdaq-ad';
 
 interface props {
   adUnitId: string;

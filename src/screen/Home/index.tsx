@@ -6,7 +6,7 @@ import Error from 'component/Error';
 import Loading from 'component/Loading';
 import {useNavigationcomponentDidAppear} from 'utils/hook/navigation';
 import {Navigation} from 'react-native-navigation';
-import {AdFormat} from 'react-native-tapdaq';
+import {AdFormat} from 'react-native-tapdaq-ad';
 
 const fetcher = (url: string) => instance.get(url).then((res) => res.data);
 

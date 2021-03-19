@@ -13,7 +13,7 @@ import Tapdaq, {
   addEventListener,
   removeEventListener,
   eventName,
-} from 'react-native-tapdaq';
+} from 'react-native-tapdaq-ad';
 import analityc from '@react-native-firebase/analytics';
 
 type EventHandlerComponentDidDisappearEvent = (

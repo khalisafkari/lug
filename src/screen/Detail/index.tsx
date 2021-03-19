@@ -15,7 +15,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import {Navigation} from 'react-native-navigation';
-import {AdFormat} from 'react-native-tapdaq';
+import {AdFormat} from 'react-native-tapdaq-ad';
 dayjs.extend(relativeTime);
 
 const fetcher = (url: string) => instance.get(url).then((res) => res.data);

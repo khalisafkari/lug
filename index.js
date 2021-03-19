@@ -15,7 +15,7 @@ import Protect from '@screen/Protect';
 import {RouteSplash} from '@utils/route';
 
 import analytics from '@react-native-firebase/analytics';
-import Tapdaq from 'react-native-tapdaq';
+import Tapdaq from 'react-native-tapdaq-ad';
 import * as Sentry from '@sentry/react-native';
 import OneSignal from 'react-native-onesignal';
 
