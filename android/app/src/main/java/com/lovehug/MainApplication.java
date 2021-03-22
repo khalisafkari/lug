@@ -14,6 +14,7 @@ import java.util.List;
 import com.reactnativenavigation.NavigationApplication;
 import com.reactnativenavigation.react.NavigationReactNativeHost;
 import android.webkit.WebView;
+import com.microsoft.codepush.react.CodePush;
 
 
 public class MainApplication extends NavigationApplication {
@@ -29,8 +30,6 @@ public class MainApplication extends NavigationApplication {
         protected List<ReactPackage> getPackages() {
           @SuppressWarnings("UnnecessaryLocalVariable")
           List<ReactPackage> packages = new PackageList(this).getPackages();
-          // Packages that cannot be autolinked yet can be added manually here, for example:
-          // packages.add(new MyReactNativePackage());
           return packages;
         }
 
@@ -38,6 +37,12 @@ public class MainApplication extends NavigationApplication {
         protected String getJSMainModuleName() {
           return "index";
         }
+
+         @Override
+         protected String getJSBundleFile() {
+              return CodePush.getJSBundleFile();
+         }
+
       };
 
   @Override
