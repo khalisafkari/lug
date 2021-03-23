@@ -12,8 +12,8 @@
   "dependencies": {
     "@react-native-firebase/analytics": "^11.1.2",
     "@react-native-firebase/app": "^11.1.2",
+    "@react-native-firebase/crashlytics": "^11.1.2",
     "@react-native-firebase/perf": "^11.1.2",
-    "@sentry/react-native": "^2.2.2",
     "@stream-io/flat-list-mvcp": "^0.0.9",
     "axios": "^0.21.1",
     "dayjs": "^1.10.4",

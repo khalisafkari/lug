@@ -8,9 +8,9 @@ import Ionic from 'react-native-vector-icons/Ionicons';
 import styles from './styles';
 import OneSignal, {DeviceState} from 'react-native-onesignal';
 import useSWR from 'swr';
-import * as Sentry from '@sentry/react-native';
 import VersionCheck from 'react-native-version-check';
 import analytics from '@react-native-firebase/analytics';
+import crashlytics from '@react-native-firebase/crashlytics';
 
 interface props {
   componentId: string;
@@ -20,9 +20,9 @@ const fetcherOneSignal = async (): Promise<DeviceState> => {
   try {
     const isUser = await OneSignal.getDeviceState();
     return isUser;
-  } catch (e) {
-    Sentry.captureException(e);
-    throw e;
+  } catch (error) {
+    crashlytics().recordError(error);
+    throw error;
   }
 };
 
@@ -30,9 +30,9 @@ const fetchUpdate = async () => {
   try {
     const update = await VersionCheck.needUpdate({});
     return update;
-  } catch (e) {
-    Sentry.captureException(e);
-    throw e;
+  } catch (error) {
+    crashlytics().recordError(error);
+    throw error;
   }
 };
 
@@ -69,7 +69,6 @@ const Profile: React.FC<props> = (props) => {
 
   const onLogoutLayout = () => {
     onLogout();
-    Sentry.configureScope((scope) => scope.setUser(null));
     Navigation.mergeOptions(props.componentId, {
       bottomTabs: {
         currentTabIndex: 0,

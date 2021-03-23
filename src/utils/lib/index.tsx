@@ -4,7 +4,9 @@ import useSWR, {useSWRInfinite} from 'swr';
 import {isData as dt, manga} from '../../../typed';
 import {RouteDefault, RouteProtect} from 'utils/route';
 import {ToastAndroid} from 'react-native';
-import * as Sentry from '@sentry/react-native';
+import crashlytics from '@react-native-firebase/crashlytics';
+import analytics from '@react-native-firebase/analytics';
+import OneSignal from 'react-native-onesignal';
 
 interface post {
   manga: number | null;
@@ -31,7 +33,7 @@ const saveToken = async (payload: getToken) => {
   } catch (e) {
     const error = new Error();
     error.message = 'failed';
-    Sentry.captureException(error);
+    crashlytics().recordError(error);
     throw error;
   }
 };
@@ -40,9 +42,9 @@ const getToken = async (): Promise<getToken | object | null> => {
   try {
     const token: any = await MMKVWithToken.getMapAsync('token');
     return token;
-  } catch (e) {
-    Sentry.captureException(e);
-    throw e;
+  } catch (error) {
+    crashlytics().recordError(error);
+    throw error;
   }
 };
 
@@ -61,8 +63,9 @@ const findById = async (id: number) => {
       error.status = 403;
       throw error;
     }
-  } catch (e) {
-    throw e;
+  } catch (error) {
+    crashlytics().recordError(error);
+    throw error;
   }
 };
 
@@ -77,19 +80,31 @@ const useFindBookId = (id: number) => {
   };
 };
 
+const onSetUserID = (email: string) => {
+  return Promise.all([
+    crashlytics().setUserId(email),
+    crashlytics().setAttribute('email', email),
+    analytics().setUserId(email),
+    analytics().setUserProperty('email', email),
+    OneSignal.setEmail(email),
+    OneSignal.setExternalUserId(email),
+  ]);
+};
+
 const onLoginUser = async (email: string, password: string) => {
   try {
     const userIf = await instance.get(
       `/api/user/token?email=${email}&password=${password}`,
     );
     await saveToken(userIf.data);
+    await onSetUserID(email);
     ToastAndroid.show('login success', ToastAndroid.SHORT);
     return userIf.data;
   } catch (e) {
     const error: any = new Error(e);
     error.message = 'failed';
     error.status = 404;
-    Sentry.captureException(error);
+    crashlytics().recordError(error);
     throw error;
   }
 };
@@ -108,9 +123,9 @@ const saveBookmarkId = async (id: number) => {
     const error = new Error();
     error.message = 'failed token';
     throw error;
-  } catch (e) {
-    Sentry.captureException(e);
-    throw e;
+  } catch (error) {
+    crashlytics().recordError(error);
+    throw error;
   }
 };
 
@@ -128,9 +143,9 @@ const removeBookmarkId = async (id: number) => {
     const error = new Error();
     error.message = 'failed token';
     throw error;
-  } catch (e) {
-    Sentry.captureException(e);
-    throw e;
+  } catch (error) {
+    crashlytics().recordError(error);
+    throw error;
   }
 };
 
@@ -149,9 +164,9 @@ const fetchAllBook = async (url: string) => {
     error.message = 'failed token';
     error.status = 403;
     throw error;
-  } catch (e) {
-    Sentry.captureException(e);
-    throw e;
+  } catch (error) {
+    crashlytics().recordError(error);
+    throw error;
   }
 };
 
@@ -200,9 +215,9 @@ const onLogout = async () => {
   try {
     await MMKVWithToken.clearStore();
     return;
-  } catch (e) {
-    Sentry.captureException(e);
-    throw e;
+  } catch (error) {
+    crashlytics().recordError(error);
+    throw error;
   }
 };
 
@@ -230,9 +245,9 @@ const onSendComment = async (t: post) => {
     error.message = 'failed token';
     error.status = 403;
     throw error;
-  } catch (e) {
-    Sentry.captureException(e);
-    throw e;
+  } catch (error) {
+    crashlytics().recordError(error);
+    throw error;
   }
   //{"content":"khalis","c_id":0,"delete_comment":0,"edited":0}
   //http://localhost:3000/api/manga/comment/189
@@ -243,9 +258,9 @@ const getCountry = async () => {
     const country = await fetch('https://api-geolocation.zeit.sh/');
     const data = await country.json();
     return data;
-  } catch (e) {
-    Sentry.captureException(e);
-    throw e;
+  } catch (error) {
+    crashlytics().recordError(error);
+    throw error;
   }
 };
 

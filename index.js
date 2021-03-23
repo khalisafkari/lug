@@ -16,20 +16,9 @@ import {RouteSplash} from '@utils/route';
 
 import analytics from '@react-native-firebase/analytics';
 import Tapdaq from 'react-native-tapdaq-ad';
-import * as Sentry from '@sentry/react-native';
 import OneSignal from 'react-native-onesignal';
-import codePush from 'react-native-code-push';
 
-Navigation.registerComponent('com.home', () =>
-  codePush({
-    checkFrequency: codePush.CheckFrequency.ON_APP_RESUME,
-    updateDialog: {
-      title: 'An update is available!',
-      appendReleaseDescription: true,
-      descriptionPrefix: '\n\nChange log:\n',
-    },
-  })(Home),
-);
+Navigation.registerComponent('com.home', () => Home);
 Navigation.registerComponent('com.list', () => List);
 Navigation.registerComponent('com.rak', () => Rak);
 Navigation.registerComponent('com.profile', () => Profile);
@@ -58,18 +47,12 @@ Navigation.setLazyComponentRegistrator((componentName) => {
   }
 });
 
-const routingInstrumentation = new Sentry.RoutingInstrumentation();
-
 Navigation.events().registerComponentDidDisappearListener(
   async ({componentName, componentType}) => {
     if (componentType === 'Component') {
-      routingInstrumentation.onRouteWillChange({
-        name: componentName,
-        op: 'navigation',
-      });
       await analytics().logScreenView({
         screen_name: componentName,
-        screen_class: componentName,
+        screen_class: 'navigation',
       });
     }
   },
@@ -96,26 +79,6 @@ Navigation.setDefaultOptions({
     titleDisplayMode: 'alwaysHide',
     tabsAttachMode: 'onSwitchToTab',
   },
-});
-
-Sentry.init({
-  dsn:
-    'https://cb4a2f6cbc904f8b829799180f887f4f@o121589.ingest.sentry.io/5661451',
-  integrations: [
-    new Sentry.ReactNativeTracing({
-      routingInstrumentation,
-      tracingOrigins: [
-        'localhost',
-        'beta.lovehug.net',
-        'api-geolocation.zeit.sh',
-        /^\//,
-      ],
-    }),
-  ],
-  debug: __DEV__,
-  tracesSampleRate: 1.0,
-  autoSessionTracking: true,
-  environment: __DEV__ ? 'development' : 'production',
 });
 
 Tapdaq.initialize(

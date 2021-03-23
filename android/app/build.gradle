@@ -1,5 +1,6 @@
 apply plugin: "com.android.application"
 apply plugin: "com.google.gms.google-services"
+apply plugin: "com.google.firebase.crashlytics"
 apply plugin: "com.google.firebase.firebase-perf"
 
 buildscript {
@@ -175,16 +176,3 @@ task copyDownloadableDepsToLibs(type: Copy) {
 }
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
-
-buildscript {
-    repositories {
-        maven { url 'https://artifacts.applovin.com/android' }
-    }
-    dependencies {
-        classpath "com.applovin.quality:AppLovinQualityServiceGradlePlugin:3.+"
-    }
-}
-apply plugin: 'applovin-quality-service'
-applovin {
-    apiKey "DBEOT1oNG9DLUNcCVRREGW8TWzrG4mh7cbe2bWWK5hgmJP_h-Fu8Xi77RG2sWu97kUCsIu4PcWZve3d0v14Ktt"
-}

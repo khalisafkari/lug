@@ -1,6 +1,6 @@
 import axios from 'axios';
 import perf from '@react-native-firebase/perf';
-import * as Sentry from '@sentry/react-native';
+import crashlytics from '@react-native-firebase/crashlytics';
 
 const instance = axios.create({
   baseURL: 'https://beta.lovehug.net',
@@ -21,7 +21,7 @@ instance.interceptors.request.use(
     }
   },
   (error) => {
-    Sentry.captureException(error);
+    crashlytics().recordError(error);
     return Promise.reject(error);
   },
 );
@@ -44,7 +44,7 @@ instance.interceptors.response.use(
       httpMetric.setResponseContentType(error.response.headers['content-type']);
       await httpMetric.stop();
     } finally {
-      Sentry.captureException(error);
+      crashlytics().recordError(error);
       return Promise.reject(error);
     }
   },
