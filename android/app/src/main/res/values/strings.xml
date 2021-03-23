@@ -1,4 +1,3 @@
 <resources>
     <string name="app_name">lovehug</string>
-    <string moduleConfig="true" name="CodePushDeploymentKey">mcUeZOGB96czkwGTb_aYiq8NlxVCFLKSJpi4d</string>
 </resources>

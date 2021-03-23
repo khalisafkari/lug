@@ -24,18 +24,19 @@ const MultiComponent = React.lazy(() => import('@component/Multi'));
 const Home: React.FC<props> = ({componentId}) => {
   const {data, error} = useSWR('/api/manga', fetcher);
 
-  const modal = useRef<any>();
   const lastBackPressed = useRef<number>();
+  const modal = useRef<any>();
 
-  const syncImmediate = async () => {
-    const RemotePackage = await CodePush.checkForUpdate();
-    if (RemotePackage) {
-      modal.current.init(RemotePackage);
+  const checkUpdate = async () => {
+    const LocalPackage = await CodePush.checkForUpdate();
+    if (LocalPackage) {
+      modal.current.init(LocalPackage);
     }
   };
 
   useNavigationcomponentDidAppear(() => {
     CodePush.allowRestart();
+
     Navigation.mergeOptions(componentId, {
       topBar: {
         title: {
@@ -44,8 +45,7 @@ const Home: React.FC<props> = ({componentId}) => {
         },
       },
     });
-
-    syncImmediate();
+    checkUpdate();
     if (Platform.OS === 'android') {
       BackHandler.addEventListener('hardwareBackPress', onBackAndroid);
     }

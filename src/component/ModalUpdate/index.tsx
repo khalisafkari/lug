@@ -12,12 +12,15 @@ import {
 import Icon from 'react-native-vector-icons/Entypo';
 import Image from 'react-native-fast-image';
 import styles from './styles';
-import CodePush from 'react-native-code-push';
+import CodePush, {
+  LocalPackage as LP,
+  RemotePackage,
+} from 'react-native-code-push';
 
 interface states {
   label: string;
   description: string;
-  packageSize: string;
+  packageSize: number;
   receivedBytes: number;
   status: number;
   show: boolean;
@@ -25,7 +28,7 @@ interface states {
 }
 
 class ModalUpdate extends PureComponent<any, states> {
-  private RemotePackage: any;
+  private RemotePackage: RemotePackage | undefined;
   private Anim = new Animated.Value(0);
   private width = new Animated.Value(0);
 
@@ -36,7 +39,7 @@ class ModalUpdate extends PureComponent<any, states> {
     this.state = {
       label: '',
       description: '',
-      packageSize: '',
+      packageSize: 0,
       receivedBytes: 0,
       status: 0,
       show: false,
@@ -46,44 +49,46 @@ class ModalUpdate extends PureComponent<any, states> {
 
   install = async () => {
     LayoutAnimation.easeInEaseOut();
-    this.setState({status: 1}); //download
-    const LocalPackage = await this.RemotePackage.download((progress: any) => {
-      this.setState({
-        receivedBytes: progress.receivedBytes,
-      });
-
-      Animated.timing(this.width, {
-        // @ts-ignore
-        toValue: parseFloat(
-          // @ts-ignore
-          progress.receivedBytes / progress.totalBytes,
-        ).toFixed(2),
-        duration: 150,
-        useNativeDriver: false,
-      }).start();
-    });
-    this.setState({status: 2}); //downloadComplete
-    await LocalPackage.install(
-      LocalPackage.isMandatory
-        ? CodePush.InstallMode.IMMEDIATE
-        : CodePush.InstallMode.ON_NEXT_RESUME,
+    this.setState({status: 1});
+    const LocalPackage: LP | undefined = await this.RemotePackage?.download(
+      (progress) => {
+        this.setState({receivedBytes: progress.receivedBytes});
+        const received: number | any = (
+          progress.receivedBytes / progress.totalBytes
+        ).toFixed(2);
+        Animated.timing(this.width, {
+          toValue: received,
+          useNativeDriver: false,
+          duration: 150,
+        }).start();
+      },
     );
-    if (!LocalPackage.isMandatory) {
+    this.setState({status: 2});
+    await LocalPackage?.install(
+      LocalPackage?.isMandatory
+        ? CodePush.InstallMode.IMMEDIATE
+        : CodePush.InstallMode.ON_NEXT_RESTART,
+      0,
+    );
+    if (!LocalPackage?.isMandatory) {
       this.setState({status: 3});
+      ToastAndroid.show(
+        'Complete the update at the next startup',
+        ToastAndroid.SHORT,
+      );
       this.setVisible(false);
-      ToastAndroid &&
-        ToastAndroid.show(
-          'Complete the update at the next startup',
-          ToastAndroid.SHORT,
-        );
     }
+
+    await CodePush.notifyAppReady();
   };
 
-  init = (RemotePackage: any) => {
-    const {label, description, packageSize, isMandatory} = RemotePackage;
-    this.setState({label, description, packageSize, isMandatory});
-    this.RemotePackage = RemotePackage;
-    this.setVisible(true);
+  init = (remotePackage: RemotePackage) => {
+    if (remotePackage) {
+      const {label, description, packageSize, isMandatory} = remotePackage;
+      this.setState({label, description, packageSize, isMandatory});
+      this.RemotePackage = remotePackage;
+      this.setVisible(true);
+    }
   };
 
   ignore = () => {
@@ -148,7 +153,7 @@ class ModalUpdate extends PureComponent<any, states> {
               source={require('../../../assets/updata.png')}
             />
           </View>
-          {status == 0 && (
+          {status === 0 && (
             <View style={styles.body}>
               <ScrollView>
                 <Text style={[styles.packageSize, {color: '#772953'}]}>
@@ -158,7 +163,7 @@ class ModalUpdate extends PureComponent<any, states> {
               </ScrollView>
             </View>
           )}
-          {status == 0 && (
+          {status === 0 && (
             <View style={styles.footer}>
               {!isMandatory && (
                 <Pressable
@@ -192,9 +197,9 @@ class ModalUpdate extends PureComponent<any, states> {
                 </Text>
               </View>
               <Text style={styles.download_tip}>
-                {(status == 1 && '正在努力更新中，请等待') ||
-                  (status == 2 && '正在安装...') ||
-                  (status == 3 && '下次启动完成更新')}
+                {(status === 1 && 'Update...') ||
+                  (status === 2 && 'Install...') ||
+                  (status === 3 && 'Done')}
               </Text>
             </View>
           )}

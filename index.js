@@ -17,8 +17,14 @@ import {RouteSplash} from '@utils/route';
 import analytics from '@react-native-firebase/analytics';
 import Tapdaq from 'react-native-tapdaq-ad';
 import OneSignal from 'react-native-onesignal';
+import CodePush from 'react-native-code-push';
 
-Navigation.registerComponent('com.home', () => Home);
+Navigation.registerComponent('com.home', () =>
+  CodePush({
+    checkFrequency: CodePush.CheckFrequency.ON_APP_START,
+  })(Home),
+);
+
 Navigation.registerComponent('com.list', () => List);
 Navigation.registerComponent('com.rak', () => Rak);
 Navigation.registerComponent('com.profile', () => Profile);
