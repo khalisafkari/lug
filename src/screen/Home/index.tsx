@@ -10,7 +10,6 @@ import {
 } from 'utils/hook/navigation';
 import {Navigation} from 'react-native-navigation';
 import CodePush from 'react-native-code-push';
-import ModalUpdate from 'component/ModalUpdate';
 import config from '@utils/config';
 
 const fetcher = (url: string) => instance.get(url).then((res) => res.data);
@@ -21,23 +20,14 @@ interface props {
 
 const Slide = React.lazy(() => import('@component/Slide'));
 const MultiComponent = React.lazy(() => import('@component/Multi'));
+const ModalUpdate = React.lazy(() => import('@component/ModalCodePush'));
 
 const Home: React.FC<props> = ({componentId}) => {
   const {data, error} = useSWR('/api/manga', fetcher);
 
   const lastBackPressed = useRef<number>();
-  const modal = useRef<any>();
-
-  const checkUpdate = async () => {
-    const LocalPackage = await CodePush.checkForUpdate(config.getKeyDev());
-    if (LocalPackage) {
-      modal.current.init(LocalPackage);
-    }
-  };
 
   useNavigationcomponentDidAppear(() => {
-    CodePush.allowRestart();
-
     Navigation.mergeOptions(componentId, {
       topBar: {
         title: {
@@ -46,14 +36,12 @@ const Home: React.FC<props> = ({componentId}) => {
         },
       },
     });
-    checkUpdate();
     if (Platform.OS === 'android') {
       BackHandler.addEventListener('hardwareBackPress', onBackAndroid);
     }
   }, componentId);
 
   useNavigationcomponentDidDisappear(() => {
-    CodePush.disallowRestart();
     if (Platform.OS === 'android') {
       BackHandler.removeEventListener('hardwareBackPress', onBackAndroid);
     }
@@ -121,7 +109,9 @@ const Home: React.FC<props> = ({componentId}) => {
         </React.Suspense>
         {Object.keys(data.content).map(renderItem)}
       </ScrollView>
-      <ModalUpdate ref={modal} />
+      <React.Suspense fallback={null}>
+        <ModalUpdate />
+      </React.Suspense>
     </>
   );
 };
