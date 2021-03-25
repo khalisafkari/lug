@@ -4,7 +4,6 @@ interface config {
   getKeyDev(): string;
   githubURL: string;
 }
-
 const config: config = {
   playstore: true,
   location: ['indonesia', 'japan'],
@@ -15,7 +14,6 @@ const config: config = {
   },
   githubURL: 'https://api.github.com/repos/khalisafkari/lug/releases/latest',
 };
-
 export const getBannerId: string = config.playstore
   ? 'banner_playstore_only'
   : 'banner_ad';
