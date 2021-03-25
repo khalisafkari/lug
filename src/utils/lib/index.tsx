@@ -7,6 +7,7 @@ import {ToastAndroid} from 'react-native';
 import crashlytics from '@react-native-firebase/crashlytics';
 import analytics from '@react-native-firebase/analytics';
 import OneSignal from 'react-native-onesignal';
+import config from '@utils/config';
 
 interface post {
   manga: number | null;
@@ -40,8 +41,7 @@ const saveToken = async (payload: getToken) => {
 
 const getToken = async (): Promise<getToken | object | null> => {
   try {
-    const token: any = await MMKVWithToken.getMapAsync('token');
-    return token;
+    return await MMKVWithToken.getMapAsync('token');
   } catch (error) {
     crashlytics().recordError(error);
     throw error;
@@ -256,8 +256,7 @@ const onSendComment = async (t: post) => {
 const getCountry = async () => {
   try {
     const country = await fetch('https://api-geolocation.zeit.sh/');
-    const data = await country.json();
-    return data;
+    return await country.json();
   } catch (error) {
     crashlytics().recordError(error);
     throw error;
@@ -265,17 +264,18 @@ const getCountry = async () => {
 };
 
 const verifyCountry = (country: country) => {
-  if (typeof country !== null) {
-    if (
-      country.country.toLowerCase() === 'indonesia' ||
-      country.country.toLowerCase() === 'japan'
-    ) {
+  if (config.playstore) {
+    const ct: string = country.country.toLowerCase();
+    const negara: string | undefined = config.location.find(
+      (name) => name === ct,
+    );
+    if (negara !== undefined) {
       RouteDefault();
     } else {
       RouteProtect();
     }
   } else {
-    RouteProtect();
+    RouteDefault();
   }
 };
 

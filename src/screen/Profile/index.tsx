@@ -1,5 +1,5 @@
 import React, {useCallback} from 'react';
-import {Linking, Pressable, Text, View, Switch} from 'react-native';
+import {Linking, Pressable, Switch, Text, View} from 'react-native';
 import {getToken, onLogout} from '@utils/lib';
 import {useNavigationcomponentDidAppear} from 'utils/hook/navigation';
 import {Navigation} from 'react-native-navigation';
@@ -11,6 +11,8 @@ import useSWR from 'swr';
 import VersionCheck from 'react-native-version-check';
 import analytics from '@react-native-firebase/analytics';
 import crashlytics from '@react-native-firebase/crashlytics';
+import config from '@utils/config';
+import instance from 'utils/instance';
 
 interface props {
   componentId: string;
@@ -18,8 +20,7 @@ interface props {
 
 const fetcherOneSignal = async (): Promise<DeviceState> => {
   try {
-    const isUser = await OneSignal.getDeviceState();
-    return isUser;
+    return await OneSignal.getDeviceState();
   } catch (error) {
     crashlytics().recordError(error);
     throw error;
@@ -28,8 +29,15 @@ const fetcherOneSignal = async (): Promise<DeviceState> => {
 
 const fetchUpdate = async () => {
   try {
-    const update = await VersionCheck.needUpdate({});
-    return update;
+    if (config.playstore) {
+      return await VersionCheck.needUpdate({});
+    } else {
+      return await VersionCheck.needUpdate({
+        // @ts-ignore
+        provider: () =>
+          instance.get(config.githubURL).then(({data}) => data.tag_name),
+      });
+    }
   } catch (error) {
     crashlytics().recordError(error);
     throw error;

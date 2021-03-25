@@ -110,7 +110,6 @@ android {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
             signingConfig signingConfigs.release
-            resValue "string", "CodePushDeploymentKey", '"_3Vx-_jULPeLmqf0A3PecHdkqaaoCro9Qt5t6"'
         }
     }
 

@@ -15,6 +15,7 @@ import Tapdaq, {
   eventName,
 } from 'react-native-tapdaq-ad';
 import analityc from '@react-native-firebase/analytics';
+import {getRewardId} from '@utils/config';
 
 type EventHandlerComponentDidDisappearEvent = (
   event: ComponentDidDisappearEvent,
@@ -234,7 +235,7 @@ const useAdsIntertitial = (component: string) => {
   };
 
   const loadAds = () => {
-    Tapdaq.loadRewardedVideo('reward_ad');
+    Tapdaq.loadRewardedVideo(getRewardId);
   };
 
   const removeListen = () => {
@@ -259,7 +260,7 @@ const useAdsIntertitial = (component: string) => {
   }, component);
 
   useNavigationcomponentDidDisappear(() => {
-    Tapdaq.showRewardedVideo('reward_ad');
+    Tapdaq.showRewardedVideo(getRewardId);
     removeListen();
   }, component);
 

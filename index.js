@@ -18,9 +18,11 @@ import analytics from '@react-native-firebase/analytics';
 import Tapdaq from 'react-native-tapdaq-ad';
 import OneSignal from 'react-native-onesignal';
 import CodePush from 'react-native-code-push';
+import config from '@utils/config';
 
 Navigation.registerComponent('com.home', () =>
   CodePush({
+    deploymentKey: config.getKeyDev(),
     checkFrequency: CodePush.CheckFrequency.ON_APP_START,
   })(Home),
 );

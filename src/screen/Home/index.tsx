@@ -11,6 +11,7 @@ import {
 import {Navigation} from 'react-native-navigation';
 import CodePush from 'react-native-code-push';
 import ModalUpdate from 'component/ModalUpdate';
+import config from '@utils/config';
 
 const fetcher = (url: string) => instance.get(url).then((res) => res.data);
 
@@ -28,7 +29,7 @@ const Home: React.FC<props> = ({componentId}) => {
   const modal = useRef<any>();
 
   const checkUpdate = async () => {
-    const LocalPackage = await CodePush.checkForUpdate();
+    const LocalPackage = await CodePush.checkForUpdate(config.getKeyDev());
     if (LocalPackage) {
       modal.current.init(LocalPackage);
     }
