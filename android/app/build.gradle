@@ -145,6 +145,9 @@ dependencies {
     implementation 'com.tapdaq.sdk:TapdaqAdMobAdapter:7.8.2'
     implementation 'com.tapdaq.sdk:TapdaqAppLovinAdapter:7.8.2'
     implementation 'com.tapdaq.sdk:TapdaqFANAdapter:7.8.2'
+    implementation 'com.tapdaq.sdk:TapdaqTapjoyAdapter:7.8.2'
+    implementation 'com.tapdaq.sdk:TapdaqVungleAdapter:7.8.2'
+    implementation 'com.tapdaq.sdk:TapdaqAdColonyAdapter:7.8.2'
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
       exclude group:'com.facebook.fbjni'
