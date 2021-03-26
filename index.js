@@ -60,7 +60,7 @@ Navigation.events().registerComponentDidDisappearListener(
     if (componentType === 'Component') {
       await analytics().logScreenView({
         screen_name: componentName,
-        screen_class: 'navigation',
+        screen_class: componentName,
       });
     }
   },
