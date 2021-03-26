@@ -13,14 +13,6 @@
 -keep class com.tapdaq.unityplugin.* { *; }
 -keep class com.google.android.gms.ads.identifier.** { *; }
 
-# For communication with AdColony's WebView
--keepclassmembers class * {
-    @android.webkit.JavascriptInterface <methods>;
-}
-
-# For removing warnings due to lack of Multi-Window support
--dontwarn android.app.Activity
-
 -keep public class com.google.android.gms.ads.** {
     public *;
 }
