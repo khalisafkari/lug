@@ -16,7 +16,7 @@ import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import {Navigation} from 'react-native-navigation';
 import {AdFormat} from 'react-native-tapdaq-ad';
-import {getBannerId} from "utils/config";
+import {getBannerId} from 'utils/config';
 dayjs.extend(relativeTime);
 
 const fetcher = (url: string) => instance.get(url).then((res) => res.data);
