@@ -93,5 +93,4 @@ Tapdaq.initialize(
   '6052cf2e08fe6c2d735d6553',
   '6b290f78-f553-4f91-86cc-bcb5a4f3aed1',
 ).then(() => {});
-
 OneSignal.setAppId('deffad9f-2bd8-404e-ba0e-0d8829522aa4');
