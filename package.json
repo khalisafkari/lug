@@ -10,10 +10,10 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
-    "@react-native-firebase/analytics": "^11.1.2",
-    "@react-native-firebase/app": "^11.1.2",
-    "@react-native-firebase/crashlytics": "^11.1.2",
-    "@react-native-firebase/perf": "^11.1.2",
+    "@react-native-firebase/analytics": "^11.2.0",
+    "@react-native-firebase/app": "^11.2.0",
+    "@react-native-firebase/crashlytics": "^11.2.0",
+    "@react-native-firebase/perf": "^11.2.0",
     "@stream-io/flat-list-mvcp": "^0.0.9",
     "axios": "^0.21.1",
     "dayjs": "^1.10.4",
@@ -25,7 +25,7 @@
     "react-native-intersection-observer": "^0.0.7",
     "react-native-mmkv-storage": "0.4.4",
     "react-native-navigation": "^7.12.0",
-    "react-native-onesignal": "^4.0.5",
+    "react-native-onesignal": "^4.0.6",
     "react-native-read-more-text": "^1.1.2",
     "react-native-render-html": "^5.1.0",
     "react-native-tapdaq-ad": "^0.1.1",
@@ -34,7 +34,7 @@
     "react-native-version-check": "^3.4.2",
     "react-native-webview": "^11.3.2",
     "react-native-x-carousel": "^1.0.1",
-    "swr": "^0.5.3",
+    "swr": "^0.5.5",
     "v8-android-jit-nointl": "^9.88.0"
   },
   "devDependencies": {
