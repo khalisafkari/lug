@@ -21,10 +21,10 @@ import CodePush from 'react-native-code-push';
 import config from '@utils/config';
 
 Navigation.registerComponent('com.home', () =>
-  CodePush({
-    deploymentKey: config.getKeyDev(),
-    checkFrequency: CodePush.CheckFrequency.ON_APP_START,
-  })(Home),
+    CodePush({
+      deploymentKey: config.getKeyDev(),
+      checkFrequency: CodePush.CheckFrequency.ON_APP_START,
+    })(Home),
 );
 
 Navigation.registerComponent('com.list', () => List);
@@ -37,7 +37,7 @@ Navigation.events().registerAppLaunchedListener(async () => {
   RouteSplash();
 });
 
-Navigation.setLazyComponentRegistrator((componentName) => {
+Navigation.setLazyComponentRegistrator(componentName => {
   if (componentName === 'com.detail') {
     Navigation.registerComponent('com.detail', () => Detail);
   } else if (componentName === 'com.reader') {
@@ -56,14 +56,14 @@ Navigation.setLazyComponentRegistrator((componentName) => {
 });
 
 Navigation.events().registerComponentDidDisappearListener(
-  async ({componentName, componentType}) => {
-    if (componentType === 'Component') {
-      await analytics().logScreenView({
-        screen_name: componentName,
-        screen_class: componentName,
-      });
-    }
-  },
+    async ({componentName, componentType}) => {
+      if (componentType === 'Component') {
+        await analytics().logScreenView({
+          screen_name: componentName,
+          screen_class: componentName,
+        });
+      }
+    },
 );
 
 Navigation.setDefaultOptions({
@@ -87,10 +87,14 @@ Navigation.setDefaultOptions({
     titleDisplayMode: 'alwaysHide',
     tabsAttachMode: 'onSwitchToTab',
   },
+  animations: {
+    setRoot: {
+      waitForRender: true,
+    },
+  },
 });
-
 Tapdaq.initialize(
-  '6052cf2e08fe6c2d735d6553',
-  '6b290f78-f553-4f91-86cc-bcb5a4f3aed1',
+    '6052cf2e08fe6c2d735d6553',
+    '6b290f78-f553-4f91-86cc-bcb5a4f3aed1',
 ).then(() => {});
 OneSignal.setAppId('deffad9f-2bd8-404e-ba0e-0d8829522aa4');

@@ -37,7 +37,7 @@ def enableSeparateBuildPerCPUArchitecture = false
 /**
  * Run Proguard to shrink the Java bytecode in release builds.
  */
-def enableProguardInReleaseBuilds = false
+def enableProguardInReleaseBuilds = true
 
 /**
  * The preferred build flavor of JavaScriptCore.
@@ -62,6 +62,7 @@ def jscFlavor = 'org.webkit:android-jsc:+'
 def enableHermes = project.ext.react.get("enableHermes", false);
 
 android {
+    ndkVersion rootProject.ext.ndkVersion
     compileSdkVersion rootProject.ext.compileSdkVersion
 
     compileOptions {
@@ -122,7 +123,7 @@ android {
             def abi = output.getFilter(OutputFile.ABI)
             if (abi != null) {  // null for the universal-debug, universal-release variants
                 output.versionCodeOverride =
-                        versionCodes.get(abi) * 1048576 + defaultConfig.versionCode
+                         defaultConfig.versionCode * 1000 + versionCodes.get(abi)
             }
 
         }
@@ -141,12 +142,12 @@ dependencies {
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
     implementation 'org.chromium:v8-android:+'
 
-
     implementation 'com.tapdaq.sdk:TapdaqAdMobAdapter:7.8.2'
     implementation 'com.tapdaq.sdk:TapdaqAppLovinAdapter:7.8.2'
     implementation 'com.tapdaq.sdk:TapdaqFANAdapter:7.8.2'
     implementation 'com.tapdaq.sdk:TapdaqTapjoyAdapter:7.8.2'
     implementation 'com.tapdaq.sdk:TapdaqVungleAdapter:7.8.2'
+    implementation 'com.google.ads.mediation:applovin:9.15.2.0'
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
       exclude group:'com.facebook.fbjni'

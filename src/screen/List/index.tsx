@@ -1,12 +1,11 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Pressable, Text, TextInput, View, Animated} from 'react-native';
 import {useSWRInfinite} from 'swr/esm';
 import instance from 'utils/instance';
 import Loading from 'component/Loading';
 import styles from './styles';
-import {manga} from '../../../typed';
+import {manga} from '@typed/index';
 import Error from 'component/Error';
-import {useNavigationcomponentDidAppear} from 'utils/hook/navigation';
 import {Navigation} from 'react-native-navigation';
 
 interface props {
@@ -53,13 +52,11 @@ const List: React.FC<props> = ({componentId}) => {
     return `/api/manga/list?page=${index}`;
   }, fetcher);
 
-  useNavigationcomponentDidAppear(() => {
+  useEffect(() => {
     Navigation.mergeOptions(componentId, {
-      topBar: {
-        visible: false,
-      },
+      topBar: {visible: false},
     });
-  }, componentId);
+  }, [componentId]);
 
   if (error) {
     return React.createElement(Error, {
