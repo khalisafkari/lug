@@ -26,9 +26,9 @@ interface props {
 }
 
 const fetcher = (url: string) =>
-  instance.get(url).then((results) => results.data);
+  instance.get(url).then(results => results.data);
 
-const Reader: React.FC<props> = (props) => {
+const Reader: React.FC<props> = props => {
   const {data, error} = useSWR(`/api/manga/content/${props.id}`, fetcher);
   useRegisterHistory(props.componentId, props.mid, props.chapter, props.id);
 
@@ -184,10 +184,11 @@ const Reader: React.FC<props> = (props) => {
   return (
     <View style={styles.container}>
       <WebView
-        ref={(ref) => {
+        ref={ref => {
           webviewRef.current = ref;
         }}
         collapsable={false}
+        originWhitelist={['*']}
         onLayout={onLayoutSize}
         source={{
           html: html(state),
@@ -198,7 +199,7 @@ const Reader: React.FC<props> = (props) => {
         }}
         showsVerticalScrollIndicator={false}
         onScroll={onScrollEvent}
-        onMessage={(event) => {
+        onMessage={event => {
           if (event.nativeEvent.data === 'up') {
             Animated.timing(scrollY, {
               useNativeDriver: true,
@@ -253,7 +254,7 @@ const Reader: React.FC<props> = (props) => {
         ]}>
         <Pressable
           onPress={onPrevPush}
-          disabled={prev ? false : true}
+          disabled={!prev}
           style={styles.btnContainer}>
           <Icon name={'arrowleft'} size={25} color={prev ? '#fff' : '#333'} />
         </Pressable>
@@ -264,7 +265,7 @@ const Reader: React.FC<props> = (props) => {
         </View>
         <Pressable
           onPress={onNextPush}
-          disabled={next ? false : true}
+          disabled={!next}
           style={styles.btnContainer}>
           <Icon name={'arrowright'} size={25} color={next ? '#fff' : '#333'} />
         </Pressable>

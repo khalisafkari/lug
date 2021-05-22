@@ -3,7 +3,7 @@ import perf from '@react-native-firebase/perf';
 import crashlytics from '@react-native-firebase/crashlytics';
 
 const instance = axios.create({
-  baseURL: 'https://beta.lovehug.net',
+  baseURL: 'https://lug.my.id',
 });
 
 instance.defaults.headers['x-android'] = '#LPSOZnkZKfxcqGnj&euw@xU';
